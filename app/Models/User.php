@@ -17,8 +17,12 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $primaryKey = 'user_id';
+    protected $keyType = 'int';
+    public $incrementing = true;
+    
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
     ];
