@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js','resources/css/index.css'])
+</head>
+<body class="font-sans text-gray-100 antialiased background">
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+    <div class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+        <!-- Background Decoration (optional cube blur like your sample image) -->
+        <div class="absolute top-20 left-1/2 transform -translate-x-1/2 opacity-40 blur-2xl">
+            <div class="w-72 h-72 bg-[#d9232e] rounded-2xl rotate-45"></div>
         </div>
-    </body>
+
+
+        <a href="{{ route('home') }}" class="absolute top-6 left-6 flex items-center space-x-3">
+            <img src="{{ asset('circle1.png') }}" alt="McDonald's Logo" class="w-10">
+            <h1 class="text-xl font-semibold text-[#ffcc00]">McDonald's</h1>
+        </a>
+
+        <!-- Login Container -->
+        <div class="relative w-full sm:max-w-md px-8 py-6 backdrop-blur-md ">
+            {{ $slot }}
+        </div>
+
+        <!-- Footer (optional small text) -->
+        <footer class="absolute bottom-4 text-xs text-gray-300">
+            © {{ date('Y') }} McDonald's Online Reservation. All rights reserved.
+        </footer>
+    </div>
+</body>
 </html>
