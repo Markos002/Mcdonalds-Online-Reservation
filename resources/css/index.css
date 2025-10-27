@@ -1,0 +1,46 @@
+.background{
+
+    background: #a11212;
+background: linear-gradient(180deg, rgba(161, 18, 18, 1) 0%, rgba(156, 33, 33, 1) 8%, rgba(122, 32, 32, 1) 31%, rgba(84, 22, 22, 1) 47%, rgba(12, 3, 3, 1) 87%);
+}
+
+.scene {
+  perspective: 800px;
+  position:absolute;
+}
+
+/* Cube base */
+.cube {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  transform-style: preserve-3d;
+  transform: rotateX(-35deg) rotateY(45deg);
+}
+
+/* Common face style */
+.face {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(145deg, #ff5c4a, #c33a2b);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Front face */
+.front {
+  transform: translateZ(70px);
+}
+
+/* Top face */
+.top {
+  transform: rotateX(90deg) translateZ(75px);
+  background: linear-gradient(145deg, #ff7660, #e24a36);
+}
+
+/* Side face */
+.side {
+  transform: rotateY(90deg) translateZ(-75px);
+  background: linear-gradient(145deg, #d64a3a, #a8291f);
+}
