@@ -6,10 +6,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+Route::get('/reserve',function(){
+    return view('pages.step1-reservation');
+});
+Route::get('/reserve2',function(){
+    return view('pages.step2-party');
+});
+Route::get('/reserve3',function(){
+    return view('pages.step3-reservation');
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

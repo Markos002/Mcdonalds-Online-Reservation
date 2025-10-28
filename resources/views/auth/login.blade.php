@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-auth-layout>
     <div class="min-h-screen flex items-center justify-center text-white">
         <div class="w-full max-w-md bg-[#2b0000]/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-[#ffcc00]/20">
             <div class="text-center mb-6">
@@ -56,4 +56,4 @@
             </p>
         </div>
     </div>
-</x-guest-layout>
+</x-auth-layout>

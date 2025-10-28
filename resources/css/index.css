@@ -44,3 +44,21 @@ background: linear-gradient(180deg, rgba(161, 18, 18, 1) 0%, rgba(156, 33, 33, 1
   transform: rotateY(90deg) translateZ(-75px);
   background: linear-gradient(145deg, #d64a3a, #a8291f);
 }
+
+.scroll-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-panel::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.5);
+  border-radius: 4px;
+}
+
+.scroll-panel::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.scroll-panel {
+  scrollbar-width: none; /* For Firefox */
+  scrollbar-color: rgba(100, 100, 100, 0.5) #f0f0f0;
+}
