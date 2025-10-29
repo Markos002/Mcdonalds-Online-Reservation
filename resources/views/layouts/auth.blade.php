@@ -25,7 +25,7 @@
 
         <a href="{{ route('home') }}" class="absolute top-6 left-6 flex items-center space-x-3">
             <img src="{{ asset('circle1.png') }}" alt="McDonald's Logo" class="w-10">
-            <h1 class="text-xl font-semibold text-[#ffcc00]">McDonald's</h1>
+            <h1 class="text-xl font-semibold text-white">McDonald's</h1>
         </a>
 
         <!-- Login Container -->

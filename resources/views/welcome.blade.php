@@ -70,20 +70,15 @@
             @if (Route::has('login'))
                 <nav class="flex items-center gap-3 sm:gap-4">
                     @auth
-                        <a href="{{ url('/dashboard') }}"
+                        <a href="{{ url('/reservation') }}"
                             class="px-5 py-1.5 border border-white text-white rounded-sm text-sm hover:bg-white hover:text-black transition">
-                            Dashboard
+                            Reserve Now!
                         </a>
                     @else
                          <a href="{{ route('register') }}"
                             class="inline-block px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:-translate-y-1">
                             Reserve Now
                         </a>
-                        <button 
-                            onclick="openModal('reservationModal')" 
-                            class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition">
-                            Open Modal
-                        </button>
                     @endauth
                 </nav>
             @endif
@@ -100,7 +95,6 @@
     @if (Route::has('login'))
         <div class="h-10 hidden lg:block"></div>
     @endif
-    <x-modal.reservation/>
 </body>
 </html>
 
