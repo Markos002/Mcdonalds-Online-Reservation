@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('party_dtl_id');
             $table->foreignId('guest_id')
                   ->nullable()
-                  ->constrained('guests','guest_id')
+                  ->constrained('guests', 'guest_id')
                   ->nullOnDelete();
             $table->string('check_in_date', 100);
             $table->string('check_in_time', 100);
@@ -23,14 +23,14 @@ return new class extends Migration
             $table->string('time_extend', 100)->nullable();
             $table->smallInteger('adults')->nullable();
             $table->smallInteger('kids')->nullable();
-            $table->string('branch', 100);
+            $table->string('branch', 100)->nullable();
             $table->string('occasion', 100);
             $table->string('party_package', 100)->nullable();
             $table->string('special_req')->nullable();
             $table->enum('status',['confirmed','cancelled','pending'])->default('pending');
             $table->string('reservation_id')->nullable();
             $table->decimal('package_price', 8,2)->nullable();
-            $table->decimal('grand_total' ,8,2);
+            $table->decimal('grand_total' ,8,2)->nullable();
             $table->timestamps();
         });
     }

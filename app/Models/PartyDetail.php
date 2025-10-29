@@ -30,4 +30,9 @@ class PartyDetail extends Model
         'package_price',
         'grand_total'
     ];
+
+    public function guest()
+    {
+        return $this->belongsTo(Guest::class,'guest_id');
+    }
 }

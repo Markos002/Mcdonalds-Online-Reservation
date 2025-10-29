@@ -18,4 +18,9 @@ class FoodPackage extends Model
         'quantity',
         'total'
     ];
+
+    public function guest()
+    {
+        return $this->belongsTo(Guest::class,'user_id');
+    }
 }

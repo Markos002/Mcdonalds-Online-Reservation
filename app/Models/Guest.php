@@ -19,4 +19,19 @@ class Guest extends Model
         'phone',
         'email'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function partyDetail()
+    {
+        return $this->hasOne(PartyDetail::class,'guest_id');
+    }
+
+    public function foodPack()
+    {
+        return $this->hasMany(FoodPackage::class,'guest_id');
+    }
 }
