@@ -12,7 +12,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js','resources/css/index.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js','resources/css/index.css','resources/js/modal.js'])
 </head>
 <body class="font-sans text-gray-100 antialiased background">
 
@@ -29,8 +29,8 @@
         </a>
 
         <!-- Login Container -->
-        <div class="scroll-panel relative w-full max-w-md md:max-w-3xl px-8 py-6 max-h-[80vh] lg:max-h-[120vh] overflow-y-auto">
-            <div class="w-full">
+        <div class="scroll-panel relative w-full max-w-md md:max-w-3xl py-6 max-h-[80vh] lg:max-h-[120vh] overflow-y-auto">
+            <div class="w-full bg-gray-800 ">
                 {{ $slot }}
             </div>
         </div>
