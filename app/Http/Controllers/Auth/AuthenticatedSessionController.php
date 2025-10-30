@@ -37,9 +37,9 @@ class AuthenticatedSessionController extends Controller
 
        return $auth->role === 'Admin'
             ? redirect('/admin/dashboard')
-            : redirect('/guest/dasboard');
+            : redirect('/guest/dashboard');
             
-    }
+    }   
 
     /**
      * Destroy an authenticated session.

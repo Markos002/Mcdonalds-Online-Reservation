@@ -11,7 +11,7 @@ class ReservationController extends Controller
 
     public function store(ReservationFormRequest $request)
     {
-        
+        dd($request);
         try{
 
             return Redirect()->back()->with('success', 'Your reservation has been recorded.');

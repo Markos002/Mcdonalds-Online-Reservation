@@ -17,7 +17,7 @@
     </head>
     <body class="font-sans antialiased h-screen flex">
         <x-sidebar/>
-        <div class="flex-1 flex flex-col bg-blue-200 h-full">
+        <div class="flex-1 flex flex-col  h-full">
             @include('layouts.navigation')
 
             <!-- Page Content -->

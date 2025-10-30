@@ -12,13 +12,13 @@
         <!-- First Name and Last Name Row -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
-                <label for="firstName" class="block text-sm font-medium mb-2 dark:text-gray-200">First Name</label>
-                <input type="text" id="firstName" name="firstName" required
+                <label for="first_name" class="block text-sm font-medium mb-2 dark:text-gray-200">First Name</label>
+                <input type="text" id="first_name" name="first_name" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             </div>
             <div>
-                <label for="lastName" class="block text-sm font-medium mb-2 dark:text-gray-200">Last Name</label>
-                <input type="text" id="lastName" name="lastName"
+                <label for="last_name" class="block text-sm font-medium mb-2 dark:text-gray-200">Last Name</label>
+                <input type="text" id="last_name" name="last_name"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             </div>
         </div>
@@ -38,8 +38,8 @@
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             </div>
             <div>
-                <label for="zipCode" class="block text-sm font-medium mb-2 dark:text-gray-200">Zip Code</label>
-                <input type="text" id="zipCode" name="zipCode"
+                <label for="zip_code" class="block text-sm font-medium mb-2 dark:text-gray-200">Zip Code</label>
+                <input type="text" id="zip_code" name="zip_code"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             </div>
         </div>
@@ -62,13 +62,13 @@
         <!-- Check-in Date, Times, Adult, Children Row -->
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
             <div>
-                <label for="checkinDate" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-in Date</label>
-                <input type="date" id="checkinDate" name="checkinDate"
+                <label for="check_in_date" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-in Date</label>
+                <input type="date" id="check_in_date" name="check_in_date"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             </div>
             <div>
-                <label for="checkinTime" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-in Time</label>
-                <select id="checkinTime" name="checkinTime"
+                <label for="check_in_time" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-in Time</label>
+                <select id="check_in_time" name="check_in_time"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     <option value=""></option>
                     <option value="morning">Morning</option>
@@ -77,9 +77,9 @@
                 </select>
             </div>
             <div>
-                <label for="checkoutTime" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-out
+                <label for="check_out_time" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-out
                     Time</label>
-                <select id="checkoutTime" name="checkoutTime"
+                <select id="check_out_time" name="check_out_time"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     <option value=""></option>
                     <option value="morning">Morning</option>
@@ -94,8 +94,8 @@
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             </div>
             <div>
-                <label for="children" class="block text-sm font-medium mb-2 dark:text-gray-200">Children</label>
-                <input type="number" id="children" name="children" maxlength="11"
+                <label for="kids" class="block text-sm font-medium mb-2 dark:text-gray-200">Children</label>
+                <input type="number" id="kids" name="kids" maxlength="11"
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             </div>

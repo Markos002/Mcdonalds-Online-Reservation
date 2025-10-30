@@ -13,7 +13,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="text-sm font-medium dark:text-gray-200">Madagascar</span>
-                    <input type="radio" name="theme" value="madagascar"
+                    <input type="radio" name="party_package" value="madagascar"
                         class="w-4 h-4 text-[#C85A54] focus:ring-[#C85A54] focus:ring-2 border-gray-300">
                 </div>
             </label> <!-- Happy -->
@@ -24,7 +24,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="text-sm font-medium dark:text-gray-200">Happy</span>
-                    <input type="radio" name="theme" value="happy"
+                    <input type="radio" name="party_package" value="happy"
                         class="w-4 h-4 text-[#C85A54] focus:ring-[#C85A54] focus:ring-2 border-gray-300">
                 </div>
             </label> <!-- Cocomelon -->
@@ -35,7 +35,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="text-sm font-medium dark:text-gray-200">Cocomelon</span>
-                    <input type="radio" name="theme" value="cocomelon"
+                    <input type="radio" name="party_package" value="cocomelon"
                         class="w-4 h-4 text-[#C85A54] focus:ring-[#C85A54] focus:ring-2 border-gray-300">
                 </div>
             </label> <!-- My little pony -->
@@ -47,7 +47,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="text-sm font-medium dark:text-gray-200">My little pony</span>
-                    <input type="radio" name="theme" value="my-little-pony"
+                    <input type="radio" name="party_package" value="my-little-pony"
                         class="w-4 h-4 text-[#C85A54] focus:ring-[#C85A54] focus:ring-2 border-gray-300">
                 </div>
             </label>

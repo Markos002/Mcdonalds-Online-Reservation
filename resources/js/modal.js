@@ -57,10 +57,10 @@
         const occasion = document.querySelector('input[name="occasion"]:checked');
 
         // Check if all required fields are filled
-        const isValid = firstName?.value.trim() && 
-                       checkinDate?.value && 
-                       checkinTime?.value && 
-                       checkoutTime?.value && 
+        const isValid = first_name?.value.trim() && 
+                       check_in_date?.value && 
+                       check_in_time?.value && 
+                       check_out_time?.value && 
                        adult?.value && 
                        occasion;
 
@@ -127,10 +127,10 @@
         showStep(currentStep);
 
         // Get all required fields
-        const firstName = document.getElementById('firstName');
-        const checkinDate = document.getElementById('checkinDate');
-        const checkinTime = document.getElementById('checkinTime');
-        const checkoutTime = document.getElementById('checkoutTime');
+        const firstName = document.getElementById('first_name');
+        const checkinDate = document.getElementById('check_in_date');
+        const checkinTime = document.getElementById('check_in_time');
+        const checkoutTime = document.getElementById('check_out_time');
         const adult = document.getElementById('adult'); 
         const occasionRadios = document.querySelectorAll('input[name="occasion"]');
 

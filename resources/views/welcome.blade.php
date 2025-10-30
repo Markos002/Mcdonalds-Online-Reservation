@@ -35,15 +35,21 @@
 
             @if (Route::has('login'))
                 <nav class="flex items-center gap-3 sm:gap-4">
-                    @auth
-                        <a href="{{ url('/dashboard') }}"
+                @auth
+                    @if (Auth::user()->role === 'admin')
+                        <a href="{{ url('/admin/dashboard') }}"
                             class="px-5 py-1.5 border border-white text-white rounded-sm text-sm hover:bg-white hover:text-black transition">
                             Dashboard
                         </a>
                     @else
-                        <x-button.home-button :hrefLink="route('login')">Login</x-button.home-button>
-
-                    @endauth
+                        <a href="{{ url('/guest/dashboard') }}"
+                            class="px-5 py-1.5 border border-white text-white rounded-sm text-sm hover:bg-white hover:text-black transition">
+                            Dashboard
+                        </a>
+                    @endif
+                @else
+                    <x-button.home-button :hrefLink="route('login')">Login</x-button.home-button>
+                @endauth
                 </nav>
             @endif
         </div>
