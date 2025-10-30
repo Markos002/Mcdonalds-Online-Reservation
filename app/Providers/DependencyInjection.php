@@ -13,7 +13,7 @@ use App\Repository\UserRepository;
 use App\Services\Contracts\IReservationService;
 use App\Services\GenerateSessionService;
 use App\Services\ReservationService;
-use IGenerateSessionService;
+use App\Services\Contracts\IGenerateSessionService;
 use Illuminate\Support\ServiceProvider;
 
 class DependencyInjection extends ServiceProvider

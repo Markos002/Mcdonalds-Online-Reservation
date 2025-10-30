@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use IGenerateSessionService;
+use App\Services\Contracts\IGenerateSessionService;
 
 class GenerateSessionService implements IGenerateSessionService
 {
