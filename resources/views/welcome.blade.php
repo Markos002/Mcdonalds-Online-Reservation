@@ -76,7 +76,7 @@
             @if (Route::has('login'))
                 <nav class="flex items-center gap-3 sm:gap-4">
                     @auth
-                        <a href="{{ url('/reservation') }}"
+                        <a href="{{ url('/guest/reservation') }}"
                             class="px-5 py-1.5 border border-white text-white rounded-sm text-sm hover:bg-white hover:text-black transition">
                             Reserve Now!
                         </a>

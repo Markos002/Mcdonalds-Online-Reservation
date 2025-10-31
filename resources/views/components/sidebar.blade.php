@@ -13,6 +13,7 @@
 <aside id="sidebar" class="fixed lg:static top-0 left-0 h-full w-72 bg-white border-r border-gray-200 p-6 flex flex-col z-40 transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0">
     <x-sidebar-header/>
     <!-- NORMAL NAVIGATION OF ADMIN  -->
+    @if(auth()->check() && auth()->user()->role === 'admin')
     <nav class="flex-1 space-y-1 overflow-y-auto">
         <!-- Dashboard -->
 
@@ -45,6 +46,15 @@
             <span class="font-medium">SETTINGS</span>
         </a>
     </nav>
+    @endif
+    <!-- GUEST -->
+    @if(auth()->check() && auth()->user()->role === 'guest')
+    <nav class="flex-1 space-y-1 overflow-y-auto">
+        <a href="{{ route('guest.dashboard') }} " class="flex items-center py-3 px-4 gap-3 text-gray-700 hover:bg-gray-200 rounded-md transition-colors {{ request()->routeIs('guest.dashboard') ? 'border-l-yellow-500 border-2 bg-gray-200' : '' }}">
+            <span class="font-medium">MY RESERVATIONS</span>
+        </a>
+    </nav>
+    @endif
 </aside>
     
 <script>

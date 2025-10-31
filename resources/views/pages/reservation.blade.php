@@ -94,7 +94,7 @@ document.getElementById('cancelConfirm').addEventListener('click', closeConfirma
 
 document.getElementById('acceptConfirm').addEventListener('click', function() {
     closeConfirmationModal();
-    document.getElementById('reserveForm').submit(); //  Actually submit the form
+    document.getElementById('reserveForm').requestSubmit(); 
 });
 
 // close when clicking outside modal
