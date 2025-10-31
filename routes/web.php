@@ -8,27 +8,37 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/reservation',function(){
-    return view('pages.reservation');
-});
+
 
 Route::get('/test',function(){
     return view('pages.test');
 });
 
 
-Route::post('/reserve', [ReservationController::class, 'store'])->name('reserve');
 
 Route::prefix('admin')->middleware('role:admin')->group(function(){
     Route::get('/dashboard', function () {
         return view('/pages/admin/dashboard');
     })->name('admin.dashboard');
+    Route::get('/appointment', function () {
+        return view('/pages/admin/appointment');
+    })->name('admin.appointment');
+    Route::get('/pending-parties', function () {
+        return view('/pages/admin/pendingparties');
+    })->name('admin.pending-parties');
 });
 
 Route::prefix('guest')->middleware('role:guest')->group(function(){
     Route::get('/dashboard', function () {
         return view('/pages/guest/dashboard');
     })->name('guest.dashboard');
+    Route::post('/reserve', [ReservationController::class, 'store'])->name('guest.reserve');
+    Route::get('/reservation',function(){
+        return view('pages.reservation');
+    });
+    Route::get('/confirmation',function(){
+        return view('pages.confirmation');
+    });
 
 });
 
