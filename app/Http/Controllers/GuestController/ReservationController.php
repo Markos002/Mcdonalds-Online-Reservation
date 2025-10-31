@@ -4,21 +4,27 @@ namespace App\Http\Controllers\GuestController;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReservationFormRequest;
+use App\Services\Contracts\IReservationService;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
 
+    public function __construct(
+        protected IReservationService $reservationService,
+    ){}
+
     public function store(ReservationFormRequest $request)
     {
-        dd($request);
+    
         try{
 
-            return Redirect()->back()->with('success', 'Your reservation has been recorded.');
+            $this->reservationService->store($request->validated());
+            return redirect()->back()->with('success', 'Your reservation has been successfully submitted!');
 
         }catch(\Exception $e){
 
-            return Redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
 
         }
     }

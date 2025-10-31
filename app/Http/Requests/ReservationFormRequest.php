@@ -27,21 +27,22 @@ class ReservationFormRequest extends FormRequest
             'last_name'  => ['required', 'string', 'max:50'],
             'address'    => ['required', 'string', 'max:100'],
             'city'       => ['required', 'string', 'max:50'],
-            'zip_code'   => ['nullable', 'numeric', 'regex:^\d{4}$'],
-            'phone'      => ['required', 'numeric', 'regex:^(?:\+63|0)9\d{9}$'],
+            'zip_code'   => ['nullable', 'numeric', 'regex:/^\d{4}$/'],
+            'phone'      => ['required', 'numeric', 'regex:/^(?:\+63|0)9\d{9}$/'],
             'email'      => ['required', 'string', 'email', 'max:50'],
             'check_in_date' => ['required', 'string', 'max:50'],
             'check_in_time' => ['required', 'string', 'max:50'],
             'check_out_time'=> ['required', 'string', 'max:50'],
             'adults'   => ['nullable', 'numeric', 'regex:/^\d+$/'],
             'kids'     => ['nullable', 'numeric', 'regex:/^\d+$/'],
-            'branch'   => ['nullable', 'string', 'max:50'],
-            'occasion' => ['requird', 'string', 'max:50'],
-            'party_package' => ['nullable', 'string', 'max:50'],
-            'special_req'   => ['nullable', 'string', 'max:255'],
-            'name'     => ['required', 'string', 'max:50'],
-            'price'    => ['requird', 'numeric', 'regex:/^\d{1,6}(\.\d{1,2})?$/'],
-            'quantity' => ['required', 'numeric', 'min:0', 'regex:/^\d+(\.\d{1,2})?$/']
+            'occasion' => ['required', 'string', 'max:50'],
+            
+            'food_packages'               => ['required', 'array', 'min:1'],
+            'food_packages.*.name'        => ['required', 'string', 'max:50'],
+            'food_packages.*.price'       => ['required', 'numeric', 'regex:/^\d{1,6}(\.\d{1,2})?$/'],
+            'food_packages.*.quantity'    => ['required', 'integer', 'min:1'],
+
+
         ];
     }
 }

@@ -89,7 +89,7 @@
             </div>
             <div>
                 <label for="adult" class="block text-sm font-medium mb-2 dark:text-gray-200">Adult</label>
-                <input type="number" id="adult" name="adult" maxlength="11"
+                <input type="number" id="adult" name="adults" maxlength="11"
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             </div>

@@ -131,7 +131,7 @@
         const checkinDate = document.getElementById('check_in_date');
         const checkinTime = document.getElementById('check_in_time');
         const checkoutTime = document.getElementById('check_out_time');
-        const adult = document.getElementById('adult'); 
+        const adult = document.getElementById('adults'); 
         const occasionRadios = document.querySelectorAll('input[name="occasion"]');
 
         // Add input event listeners for real-time validation

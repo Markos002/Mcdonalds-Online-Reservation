@@ -33,6 +33,6 @@ class PartyDetail extends Model
 
     public function guest()
     {
-        return $this->belongsTo(Guest::class,'guest_id');
+        return $this->belongsTo(Guest::class,'guest_id', 'guest_id');
     }
 }

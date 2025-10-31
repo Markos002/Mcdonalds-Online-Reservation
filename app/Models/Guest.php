@@ -22,16 +22,16 @@ class Guest extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class,'user_id', 'user_id');
     }
 
     public function partyDetail()
     {
-        return $this->hasOne(PartyDetail::class,'guest_id');
+        return $this->hasOne(PartyDetail::class,'guest_id', 'guest_id');
     }
 
     public function foodPack()
     {
-        return $this->hasMany(FoodPackage::class,'guest_id');
+        return $this->hasMany(FoodPackage::class,'guest_id', 'guest_id');
     }
 }

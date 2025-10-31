@@ -21,6 +21,6 @@ class FoodPackage extends Model
 
     public function guest()
     {
-        return $this->belongsTo(Guest::class,'user_id');
+        return $this->belongsTo(Guest::class,'guest_id', 'guest_id');
     }
 }
