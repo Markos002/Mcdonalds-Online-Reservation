@@ -25,7 +25,8 @@ class PartyDetail extends Model
         'occasion',
         'party_package',
         'special_req',
-        'status',
+        'party_status',
+        'payment_status',
         'reservation_id',
         'package_price',
         'grand_total'

@@ -33,18 +33,77 @@ class GuestRepository implements IGuestRepository
 
     public function getPendingPayments()
     {
+        $paymentStatus = 'unpaid';
+        $partyStatus   = 'pending';
 
-        return Guest::with('partyDetail',function($query){
-                        $query->select(
-                            
-                        );
-                        })
-                  ->select(
+        return Guest::whereHas('partyDetail', function ($query) use ($paymentStatus, $partyStatus) {
+                $query->where('payment_status', $paymentStatus)
+                    ->where('party_status', $partyStatus);
+            })
+            ->with(['partyDetail' => function ($query) use ($paymentStatus, $partyStatus) {
+                $query->select(
                     'guest_id',
-                    DB::raw("CONCAT(first_name,', ',last_name) AS customer"),
-
-                  )
-                  ->paginate(10);
+                    'reservation_id',
+                    'occasion',
+                    'created_at',
+                    'grand_total'
+                )
+                ->where('payment_status', $paymentStatus)
+                ->where('party_status', $partyStatus);
+            }])
+            ->select(
+                'guest_id',
+                DB::raw("CONCAT(first_name, ' ', last_name) AS customer")
+            )
+            ->paginate(10);
     }
+
+    public function getOnGoingParties()
+    {
+        $paymentStatus = 'paid';
+        $partyStatus   = 'waiting';
+
+        return Guest::whereHas('partyDetail', function ($query) use ($paymentStatus, $partyStatus) {
+                $query->where('payment_status', $paymentStatus)
+                    ->where('party_status', $partyStatus);
+            })
+            ->with(['partyDetail' => function ($query) use ($paymentStatus, $partyStatus) {
+                $query->select(
+                    'guest_id',
+                    'reservation_id',
+                    'occasion',
+                    'created_at',
+                )
+                ->where('payment_status', $paymentStatus)
+                ->where('party_status', $partyStatus);
+            }])
+            ->select(
+                'guest_id',
+                DB::raw("CONCAT(first_name, ' ', last_name) AS customer")
+            )
+            ->paginate(10);
+    }
+
+    public function getRecords()
+    {
+        
+        return Guest::with(['partyDetail' => function ($query){
+                $query->select(
+                    'guest_id',
+                    'reservation_id',
+                    'occasion',
+                    'created_at',
+                    'party_status',
+                    'payment_status'
+                );
+            }])
+            ->select(
+                'guest_id',
+                DB::raw("CONCAT(first_name, ' ', last_name) AS customer")
+            )
+            ->paginate(10);        
+    }
+
+    
     
 }

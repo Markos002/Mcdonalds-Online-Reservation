@@ -36,6 +36,7 @@ class ReservationFormRequest extends FormRequest
             'adults'   => ['nullable', 'numeric', 'regex:/^\d+$/'],
             'kids'     => ['nullable', 'numeric', 'regex:/^\d+$/'],
             'occasion' => ['required', 'string', 'max:50'],
+            'party_package' => ['nullable', 'string'],
             
             'food_packages'               => ['required', 'array', 'min:1'],
             'food_packages.*.name'        => ['required', 'string', 'max:50'],

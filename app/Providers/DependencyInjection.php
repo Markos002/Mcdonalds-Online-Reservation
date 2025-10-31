@@ -10,8 +10,14 @@ use App\Repository\FoodPackageRepository;
 use App\Repository\GuestRepository;
 use App\Repository\PartyDetailRepository;
 use App\Repository\UserRepository;
+use App\Services\Contracts\IPartyService;
+use App\Services\Contracts\IPaymentPendingService;
+use App\Services\Contracts\IRecordRegistryService;
 use App\Services\Contracts\IReservationService;
 use App\Services\GenerateSessionService;
+use App\Services\PartyService;
+use App\Services\PaymentPendingService;
+use App\Services\RecordRegistryService;
 use App\Services\ReservationService;
 use App\Services\Contracts\IGenerateSessionService;
 use Illuminate\Support\ServiceProvider;
@@ -32,6 +38,9 @@ class DependencyInjection extends ServiceProvider
         // Services
         $this->app->bind(IGenerateSessionService::class,GenerateSessionService::class);
         $this->app->bind(IReservationService::class, ReservationService::class);   
+        $this->app->bind(IPartyService::class, PartyService::class);
+        $this->app->bind(IPaymentPendingService::class, PaymentPendingService::class);
+        $this->app->bind(IRecordRegistryService::class, RecordRegistryService::class);
     }
 
     /**
