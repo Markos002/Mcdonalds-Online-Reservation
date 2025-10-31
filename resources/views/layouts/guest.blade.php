@@ -29,8 +29,8 @@
         </a>
 
         <!-- Login Container -->
-        <div class="scroll-panel relative w-full max-w-md md:max-w-3xl py-6 max-h-[80vh] lg:max-h-[120vh] overflow-y-auto">
-            <div class="w-full bg-gray-800 ">
+        <div class="scroll-panel relative w-full max-w-md md:max-w-3xl py-6 sm:max-h-[80vh] lg:max-h-[300vh] overflow-y-auto p-5 pt-20">
+            <div class="w-full bg-gray-800 rounded-lg">
                 {{ $slot }}
             </div>
         </div>

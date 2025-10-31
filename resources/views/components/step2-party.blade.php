@@ -5,6 +5,7 @@
         <h1 class="text-white text-2xl font-bold text-center">Pick a party theme</h1>
     </div> <!-- Body -->
     <div class="p-8">
+        <input type="hidden" id="package_price" name="package_price" value="">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8"> <!-- Madagascar -->
             <label class="flex flex-col items-center cursor-pointer group">
                 <div
@@ -110,6 +111,6 @@
         <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg mb-6">
             <p class="text-xs italic dark:text-gray-300"> *Additional giveaways and game prizes may be requested at an
                 additional cost. </p>
-        </div> <!-- Submit Button -->
+        </div> 
     </div>
 </div>

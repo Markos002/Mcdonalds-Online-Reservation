@@ -49,35 +49,24 @@
         }
     }
     function validateStep1() {
-        const firstName = document.getElementById('firstName');
-        const checkinDate = document.getElementById('checkinDate');
-        const checkinTime = document.getElementById('checkinTime');
-        const checkoutTime = document.getElementById('checkoutTime');
+        const firstName = document.getElementById('first_name');
+        const checkinDate = document.getElementById('check_in_date');
+        const checkinTime = document.getElementById('check_in_time');
+        const checkoutTime = document.getElementById('check_out_time');
         const adult = document.getElementById('adult');
         const occasion = document.querySelector('input[name="occasion"]:checked');
 
-        // Check if all required fields are filled
-        const isValid = first_name?.value.trim() && 
-                       check_in_date?.value && 
-                       check_in_time?.value && 
-                       check_out_time?.value && 
-                       adult?.value && 
-                       occasion;
+        const isValid = firstName?.value.trim() && 
+                    checkinDate?.value && 
+                    checkinTime?.value && 
+                    checkoutTime?.value && 
+                    adult?.value && 
+                    occasion;
 
-        // Enable or disable the Next button
-        if (nextBtn) {
-            nextBtn.disabled = !isValid;
-            if (isValid) {
-                nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                nextBtn.classList.add('hover:bg-red-700');
-            } else {
-                nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                nextBtn.classList.remove('hover:bg-red-700');
-            }
-        }
-
+        nextBtn.disabled = !isValid;
         return isValid;
     }
+
 
     function nextStep() {
         const occasion = document.querySelector('input[name="occasion"]:checked')?.value;

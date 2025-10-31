@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form id="reserveForm" method="POST" action="{{ route('reserve') }}">
+    <form id="reserveForm" method="POST" action="{{ route('guest.reserve') }}">
     <!-- STEP 1 -->
     @csrf
     <div class="reservation-step1 bg-[#F2F3F4] dark:bg-gray-800 text-[#1b1b18] dark:text-black overflow-hidden rounded-lg">
@@ -35,12 +35,14 @@
             <!-- Confirm -->
             <button 
                 id="confirmBtn"
-                type="submit"
+                type="button"
+                onclick="openConfirmationModal()"
                 class="hidden px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold shadow-sm transition">
                 Confirm Reservation
             </button>
         </div>
     </form>
+    <x-modal.confirmation-modal/>
 </x-guest-layout>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -72,6 +74,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelectorAll(`[name^="food_packages[${index}]"]`).forEach(el => el.disabled = true);
             }
         });
+    });
+});
+
+function openConfirmationModal() {
+    document.getElementById('confirmationModal').classList.remove('hidden');
+    document.getElementById('confirmationModal').classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeConfirmationModal() {
+    document.getElementById('confirmationModal').classList.add('hidden');
+    document.getElementById('confirmationModal').classList.remove('flex');
+    document.body.style.overflow = '';
+}
+
+
+document.getElementById('cancelConfirm').addEventListener('click', closeConfirmationModal);
+
+document.getElementById('acceptConfirm').addEventListener('click', function() {
+    closeConfirmationModal();
+    document.getElementById('reserveForm').submit(); //  Actually submit the form
+});
+
+// close when clicking outside modal
+document.getElementById('confirmationModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeConfirmationModal();
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const packagePrice = document.getElementById('package_price');
+    document.addEventListener('change', function(e) {
+        if (e.target && e.target.name === 'occasion') {
+            packagePrice.value = (e.target.value === 'birthday') ? '2500' : '';
+        }
     });
 });
 </script>
