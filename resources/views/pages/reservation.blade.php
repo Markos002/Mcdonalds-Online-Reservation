@@ -50,28 +50,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     form.addEventListener('submit', function (e) {
         // Filter out empty add-ons
-        document.querySelectorAll('[name^="addons"]').forEach(input => {
-            const row = input.closest('.flex');
+        document.querySelectorAll('.addons-select').forEach(select => {
+            const row = select.closest('.flex');
             if (!row) return;
 
-            const select = row.querySelector('select');
-            const qtyInput = row.querySelector('input[type="number"]');
+            const qtyInput = row.querySelector('.addon-qty');
+            const addonName = select.value || '';
+            const qty = parseInt(qtyInput.value) || 0;
 
-            const addonName = select?.value || '';
-            const qty = qtyInput?.value || 0;
-
-            if (!addonName || qty == 0) {
-                row.querySelectorAll('select, input').forEach(el => el.disabled = true);
+            // Remove if no selection OR quantity is 0
+            if (!addonName || qty === 0) {
+                row.querySelectorAll('select, input').forEach(el => el.remove());
             }
         });
 
         // Filter out packages with quantity 0
-        document.querySelectorAll('[name^="food_packages"]').forEach(input => {
-            if (input.name.includes('[quantity]') && input.value == 0) {
+        document.querySelectorAll('[name^="food_packages"][name$="[quantity]"]').forEach(input => {
+            const qty = parseInt(input.value) || 0;
+            
+            if (qty === 0) {
                 const match = input.name.match(/\[(\d+)\]/);
                 if (!match) return;
                 const index = match[1];
-                document.querySelectorAll(`[name^="food_packages[${index}]"]`).forEach(el => el.disabled = true);
+                document.querySelectorAll(`[name^="food_packages[${index}]"]`).forEach(el => el.remove());
             }
         });
     });
