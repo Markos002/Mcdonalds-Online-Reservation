@@ -11,4 +11,6 @@ class RecordRegistryController extends Controller
     public function __construct(
         protected IRecordRegistryService $recordRegistryService 
     ){}
+
+    
 }

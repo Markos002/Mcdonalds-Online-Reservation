@@ -14,13 +14,20 @@ class ReservationController extends Controller
         protected IReservationService $reservationService,
     ){}
 
+    public function index()
+    {
+
+        return view('pages.reservation');
+
+    }
+
     public function store(ReservationFormRequest $request)
     {
-   
+ 
         try{
 
             $this->reservationService->store($request->validated());
-            return redirect()->back()->with('success', 'Your reservation has been successfully submitted!');
+            return redirect()->route('guest.dashboard')->with('success', 'Your reservation has been successfully submitted!');
 
         }catch(\Exception $e){
 

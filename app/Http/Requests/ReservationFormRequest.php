@@ -26,7 +26,7 @@ class ReservationFormRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:50'],
             'last_name'  => ['required', 'string', 'max:50'],
             'address'    => ['required', 'string', 'max:100'],
-            'city'       => ['required', 'string', 'max:50'],
+            'city'       => ['nullable', 'string', 'max:50'],
             'zip_code'   => ['nullable', 'numeric', 'regex:/^\d{4}$/'],
             'phone'      => ['required', 'numeric', 'regex:/^(?:\+63|0)9\d{9}$/'],
             'email'      => ['required', 'string', 'email', 'max:50'],
@@ -37,12 +37,15 @@ class ReservationFormRequest extends FormRequest
             'kids'     => ['nullable', 'numeric', 'regex:/^\d+$/'],
             'occasion' => ['required', 'string', 'max:50'],
             'party_package' => ['nullable', 'string'],
+            'package_price' => ['nullable', 'numeric'],
             
             'food_packages'               => ['required', 'array', 'min:1'],
             'food_packages.*.name'        => ['required', 'string', 'max:50'],
             'food_packages.*.price'       => ['required', 'numeric', 'regex:/^\d{1,6}(\.\d{1,2})?$/'],
             'food_packages.*.quantity'    => ['required', 'integer', 'min:1'],
-
+            'addons'    => ['nullable', 'array'],
+            'addons.*name' => ['nullable', 'string'],
+            'addons.*price' => ['nullable']
 
         ];
     }

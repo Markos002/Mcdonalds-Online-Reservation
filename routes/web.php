@@ -14,8 +14,6 @@ Route::get('/test',function(){
     return view('pages.test');
 });
 
-
-
 Route::prefix('admin')->middleware('role:admin')->group(function(){
     Route::get('/dashboard', function () {
         return view('/pages/admin/dashboard');
@@ -32,10 +30,10 @@ Route::prefix('guest')->middleware('role:guest')->group(function(){
     Route::get('/dashboard', function () {
         return view('/pages/guest/dashboard');
     })->name('guest.dashboard');
+
+    Route::get('reservation', [ReservationController::class, 'index']);
     Route::post('/reserve', [ReservationController::class, 'store'])->name('guest.reserve');
-    Route::get('/reservation',function(){
-        return view('pages.reservation');
-    });
+ 
     Route::get('/confirmation',function(){
         return view('pages.confirmation');
     });

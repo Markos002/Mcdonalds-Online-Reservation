@@ -27,6 +27,7 @@ class ReservationService implements IReservationService
 
     public function store(array $data)
     {
+      
         $userId = $this->getAuthId();
         
         // Create guest
@@ -41,6 +42,9 @@ class ReservationService implements IReservationService
         
         // Create food packages
         $this->createFoodPackages($guest, $data);
+
+        // Create add ons
+        $this->createAddOns($guest, $data);
         
         return $guest;
     }
@@ -49,9 +53,10 @@ class ReservationService implements IReservationService
     {
         return $this->guestRepository->create([
             'user_id'    => $userId,
-            'first_name' => $data['first_name'],
-            'last_name'  => $data['last_name'],
-            'address'    => $data['address'],
+            'first_name' => ucwords($data['first_name']),
+            'last_name'  => ucwords($data['last_name']),
+            'address'    => ucwords($data['address']),
+            'city'       => ucwords($data['city']),
             'zip_code'   => $data['zip_code'],
             'phone'      => $data['phone'],
         ]);
@@ -88,6 +93,22 @@ class ReservationService implements IReservationService
                 'price'    => $package['price'],
                 'quantity' => $package['quantity'],
                 'total'    => $package['price'] * $package['quantity']
+            ]);
+        }
+    }
+
+    private function createAddOns($guest, array $data)
+    {
+        if (empty($data['addons'])) {
+            return;
+        }
+        
+        foreach ($data['addons'] as $addon) {
+            $guest->FoodPack()->create([
+                'name'     => ucwords($addon['name']),
+                'price'    => $addon['price'],
+                'quantity' => $addon['quantity'],
+                'total'    => $addon['price'] * $addon['quantity']
             ]);
         }
     }

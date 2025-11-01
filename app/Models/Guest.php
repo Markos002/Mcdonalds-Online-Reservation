@@ -15,6 +15,7 @@ class Guest extends Model
         'first_name',
         'last_name',
         'address',
+        'city',
         'zip_code',
         'phone',
         'email'

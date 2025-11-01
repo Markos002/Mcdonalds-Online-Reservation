@@ -5,17 +5,19 @@ namespace App\Traits;
 trait CalculateFoodPrice
 {
 
-    public function calculateFoodPrice($data)
+    public function calculateFoodPrice(array $data): float
     {
-       $foodTotal = 0;
-                if(!empty($data['food_packages'])){
-                    foreach ($data['food_packages'] as $package) {
-                        $foodTotal += $package['price'] * $package['quantity'];
-                    }
-                }
-                
+        $foodPack = $this->calculateItemsTotal($data['food_packages'] ?? []);
+        $addOns = $this->calculateItemsTotal($data['addons'] ?? []);
         $packagePrice = $data['package_price'] ?? 0;
 
-        return $foodTotal + $packagePrice;
+        return $foodPack + $addOns + $packagePrice;
+    }
+
+    private function calculateItemsTotal(array $items): float
+    {
+        return collect($items)->sum(fn($item) => 
+            ($item['price'] ?? 0) * ($item['quantity'] ?? 0)
+        );
     }
 }
