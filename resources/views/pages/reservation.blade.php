@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form id="reserveForm" method="POST" action="{{ route('guest.reserve') }}">
+    <form id="reserveForm" method="POST" action="{{ route('guest.reservations.store') }}">
     <!-- STEP 1 -->
     @csrf
     <div class="reservation-step1 bg-[#F2F3F4] dark:bg-gray-800 text-[#1b1b18] dark:text-black overflow-hidden rounded-lg">

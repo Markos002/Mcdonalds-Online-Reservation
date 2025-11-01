@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GuestController\ReservationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GuestController\GuestDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,7 +15,7 @@ Route::get('/test',function(){
     return view('pages.test');
 });
 
-Route::prefix('admin')->middleware('role:admin')->group(function(){
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
     Route::get('/dashboard', function () {
         return view('/pages/admin/dashboard');
     })->name('admin.dashboard');
@@ -26,13 +27,12 @@ Route::prefix('admin')->middleware('role:admin')->group(function(){
     })->name('admin.pending-parties');
 });
 
-Route::prefix('guest')->middleware('role:guest')->group(function(){
-    Route::get('/dashboard', function () {
-        return view('/pages/guest/dashboard');
-    })->name('guest.dashboard');
+Route::prefix('guest')->middleware(['auth', 'role:guest'])->group(function(){
 
-    Route::get('reservation', [ReservationController::class, 'index']);
-    Route::post('/reserve', [ReservationController::class, 'store'])->name('guest.reserve');
+    Route::get('/dashboard',[GuestDashboardController::class, 'index'])->name('guest.dashboard');
+
+    Route::get('/reservations', [ReservationController::class, 'index']);
+    Route::post('/reservations/store', [ReservationController::class, 'store'])->name('guest.reservations.store');
  
     Route::get('/confirmation',function(){
         return view('pages.confirmation');

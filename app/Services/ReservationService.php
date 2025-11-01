@@ -64,7 +64,7 @@ class ReservationService implements IReservationService
 
     private function createPartyDetails($guest, array $data)
     {
-        $foodTotal = $this->calculateFoodPrice($data);
+        $foodTotal     = $this->calculateFoodPrice($data);
         $reservationId = $this->generateReservationId();
         
         return $guest->partyDetail()->create([
