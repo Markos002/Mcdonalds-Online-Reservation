@@ -13,9 +13,9 @@
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js'></script>
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js','resources/css/index.css'])
     </head>
-    <body class="font-sans antialiased h-screen flex">
+    <body class="font-sans antialiased flex">
         <x-sidebar/>
         <div class="flex-1 flex flex-col  h-full">
             @include('layouts.navigation')

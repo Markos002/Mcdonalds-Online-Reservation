@@ -12,8 +12,10 @@ Route::get('/', function () {
 
 
 Route::get('/test',function(){
-    return view('pages.test');
+    return view('/pages/admin/partial/edit');
 });
+
+
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
     Route::get('/dashboard', function () {
