@@ -5,6 +5,7 @@ namespace App\Http\Controllers\GuestController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReservationFormRequest;
 use App\Services\Contracts\IReservationService;
+use App\Services\Contracts\ITimeSlotAvailability;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -12,6 +13,7 @@ class ReservationController extends Controller
 
     public function __construct(
         protected IReservationService $reservationService,
+        protected ITimeSlotAvailability $timeSlotAvailability
     ){}
 
     public function index()
@@ -23,8 +25,11 @@ class ReservationController extends Controller
 
     public function post(Request $request)
     {
-        dd($request);
+        $date = $request->input('date');
+        
+       $availableSlot =  $this->timeSlotAvailability->timeSlotAvailable($date);
 
+       dd($availableSlot);
     }
 
     public function store(ReservationFormRequest $request)

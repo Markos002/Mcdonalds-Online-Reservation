@@ -14,12 +14,14 @@ use App\Services\Contracts\IPartyService;
 use App\Services\Contracts\IPaymentPendingService;
 use App\Services\Contracts\IRecordRegistryService;
 use App\Services\Contracts\IReservationService;
+use App\Services\Contracts\ITimeSlotAvailability;
 use App\Services\GenerateSessionService;
 use App\Services\PartyService;
 use App\Services\PaymentPendingService;
 use App\Services\RecordRegistryService;
 use App\Services\ReservationService;
 use App\Services\Contracts\IGenerateSessionService;
+use App\Services\TimeSlotAvailability;
 use Illuminate\Support\ServiceProvider;
 
 class DependencyInjection extends ServiceProvider
@@ -41,6 +43,7 @@ class DependencyInjection extends ServiceProvider
         $this->app->bind(IPartyService::class, PartyService::class);
         $this->app->bind(IPaymentPendingService::class, PaymentPendingService::class);
         $this->app->bind(IRecordRegistryService::class, RecordRegistryService::class);
+        $this->app->bind(ITimeSlotAvailability::class, TimeSlotAvailability::class);
     }
 
     /**

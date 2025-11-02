@@ -30,4 +30,16 @@ class PartyDetailRepository implements IPartyDetailRepository
         $find = $this->find($id);
         return $find->delete();
     }
+
+    public function getAvailablTimeSlot(string $date)
+    {
+        return PartyDetail::select(
+                'check_in_time',
+                'check_out_time',
+                'time_extend'
+            )
+            ->where('check_in_date', $date)
+            ->orderBy('check_in_time')
+            ->get();     
+    }
 }
