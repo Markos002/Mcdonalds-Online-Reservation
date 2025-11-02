@@ -1,35 +1,59 @@
-@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white'])
+@props([
+    'id' => null,
+    'name' => null,
+    'label' => null,
+    'options' => [],
+    'placeholder' => 'Select...',
+])
 
-@php
-$alignmentClasses = match ($align) {
-    'left' => 'ltr:origin-top-left rtl:origin-top-right start-0',
-    'top' => 'origin-top',
-    default => 'ltr:origin-top-right rtl:origin-top-left end-0',
-};
+<div
+    x-data="{
+        open: false,
+        selected: '',
+        select(option) {
+            this.selected = option;
+            this.open = false;
+            $refs.input.value = option;
+        }
+    }"
+    class="mb-3 relative"
+>
+    @if($label)
+        <label class="block text-gray-600 text-sm mb-1">{{ $label }}</label>
+    @endif
 
-$width = match ($width) {
-    '48' => 'w-48',
-    default => $width,
-};
-@endphp
-
-<div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
-    <div @click="open = ! open">
-        {{ $trigger }}
+    <div
+        @click="open = !open"
+        class="border border-gray-300 rounded p-2 text-sm bg-white cursor-pointer flex justify-between items-center hover:border-blue-400"
+    >
+        <span x-text="selected || '{{ $placeholder }}'" class="text-gray-700"></span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 9l-7 7-7-7" />
+        </svg>
     </div>
 
-    <div x-show="open"
-            x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0 scale-95"
-            x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-75"
-            x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-95"
-            class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }}"
-            style="display: none;"
-            @click="open = false">
-        <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }}">
-            {{ $content }}
-        </div>
+    <input type="hidden" x-ref="input" id="{{ $id }}" name="{{ $name }}">
+
+    <!-- Dropdown List -->
+    <div
+        x-show="open"
+        @click.outside="open = false"
+        class="absolute mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-48 overflow-y-auto z-50"
+        x-transition
+    >
+        @foreach($options as $option)
+            <div
+                @click="select('{{ $option }}')"
+                class="p-2 text-sm text-gray-700 hover:bg-blue-100 cursor-pointer"
+            >
+                {{ $option }}
+            </div>
+        @endforeach
+
+        @if (empty($options))
+            <div class="p-2 text-sm text-gray-400">No options available</div>
+        @endif
     </div>
 </div>

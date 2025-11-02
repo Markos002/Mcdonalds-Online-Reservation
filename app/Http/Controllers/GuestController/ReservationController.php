@@ -28,8 +28,12 @@ class ReservationController extends Controller
         $date = $request->input('date');
         
        $availableSlot =  $this->timeSlotAvailability->timeSlotAvailable($date);
-
-       dd($availableSlot);
+       
+       return response()->json([
+            'success' => true,
+            'available' => count($availableSlot) > 0,
+            'time_slots' => $availableSlot
+        ]);
     }
 
     public function store(ReservationFormRequest $request)

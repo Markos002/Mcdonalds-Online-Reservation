@@ -120,3 +120,8 @@ background: linear-gradient(180deg, rgba(161, 18, 18, 1) 0%, rgba(156, 33, 33, 1
       font-size: 0.75rem !important;
     }
   }
+
+  select {
+  max-height: 200px !important;
+  overflow-y: auto !important;
+}
