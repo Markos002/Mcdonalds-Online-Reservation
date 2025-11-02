@@ -31,6 +31,8 @@ Route::prefix('guest')->middleware(['auth', 'role:guest'])->group(function(){
 
     Route::get('/dashboard',[GuestDashboardController::class, 'index'])->name('guest.dashboard');
 
+    Route::post('/date/request', [ReservationController::class, 'post'])->name('guest.date.request');
+
     Route::get('/reservations', [ReservationController::class, 'index']);
     Route::post('/reservations/store', [ReservationController::class, 'store'])->name('guest.reservations.store');
  

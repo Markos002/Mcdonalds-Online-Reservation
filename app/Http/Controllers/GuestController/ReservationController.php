@@ -21,6 +21,12 @@ class ReservationController extends Controller
 
     }
 
+    public function post(Request $request)
+    {
+        dd($request);
+
+    }
+
     public function store(ReservationFormRequest $request)
     {
  
