@@ -17,6 +17,7 @@ class ReservationService implements IReservationService
     use GetAuthId;
     use GenerateReservationId;
     use CalculateFoodPrice;
+    
 
     public function __construct(
         protected IPartyDetailRepository $partyDetailRepository,
@@ -65,11 +66,12 @@ class ReservationService implements IReservationService
     {
         $foodTotal     = $this->calculateFoodPrice($data);
         $reservationId = $this->generateReservationId();
+        $timeOut       = $this->generateTimeOut($data);
         
         return $guest->partyDetail()->create([
             'check_in_date'  => $data['check_in_date'],
             'check_in_time'  => $data['check_in_time'],
-            'check_out_time' => $data['check_out_time'],
+            'check_out_time' => $timeOut,
             'adults'         => $data['adults'],
             'kids'           => $data['kids'],
             'occasion'       => $data['occasion'],
@@ -110,6 +112,16 @@ class ReservationService implements IReservationService
                 'total'    => $addon['price'] * $addon['quantity']
             ]);
         }
+    }
+
+    private function generateTimeOut($data)
+    {
+        $getTimeIn = $data['check_in_time'];
+
+        $time = \DateTime::createFromFormat('h:i A', $getTimeIn);
+        $time->modify('+1 hour 30 minutes');
+
+        return $time->format('g:i A');
     }
 
 }
