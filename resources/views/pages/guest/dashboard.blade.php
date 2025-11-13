@@ -128,7 +128,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         modal.classList.add('hidden');
-        console.log(`Selected date: ${date}, Time In: ${timeInVal}`);
+        const url = `{{ route('guest.reservations') }}?date=${encodeURIComponent(date)}&time_in=${encodeURIComponent(timeInVal)}`;
+        window.location.href = url;
     });
 
     cancelBtn.addEventListener('click', () => modal.classList.add('hidden'));

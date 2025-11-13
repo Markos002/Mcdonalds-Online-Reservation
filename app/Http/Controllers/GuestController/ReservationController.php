@@ -16,10 +16,12 @@ class ReservationController extends Controller
         protected ITimeSlotAvailability $timeSlotAvailability
     ){}
 
-    public function index()
+    public function index(Request $request)
     {
+        $date = $request->query('date');
+        $timeIn = $request->query('time_in');
 
-        return view('pages.reservation');
+        return view('pages.reservation',compact('date', 'timeIn'));
 
     }
 

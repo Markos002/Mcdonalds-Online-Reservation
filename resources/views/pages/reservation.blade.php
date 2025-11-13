@@ -3,7 +3,7 @@
     <!-- STEP 1 -->
     @csrf
     <div class="reservation-step1 bg-[#F2F3F4] dark:bg-gray-800 text-[#1b1b18] dark:text-black overflow-hidden rounded-lg">
-        <x-step1-reservation/>
+        <x-step1-reservation :date="$date" :timeIn="$timeIn"/>
     </div>
 
     <!-- STEP 2 -->

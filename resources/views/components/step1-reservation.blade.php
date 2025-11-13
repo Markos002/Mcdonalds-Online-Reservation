@@ -66,18 +66,11 @@
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
             <div>
                 <label for="check_in_date" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-in Date</label>
-                <input type="date" id="check_in_date" name="check_in_date"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-            </div>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white" name="check_in_date" id="check_in_date" value="{{ $date }}" readonly>        
+                </div>
             <div>
                 <label for="check_in_time" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-in Time</label>
-                <select id="check_in_time" name="check_in_time"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option value=""></option>
-                    <option value="morning">Morning</option>
-                    <option value="afternoon">Afternoon</option>
-                    <option value="evening">Evening</option>
-                </select>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white" name="check_in_time" id="check_in_time" value="{{ $timeIn }}" readonly>        
             </div>
             <div>
                 <label for="check_out_time" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-out

@@ -35,7 +35,7 @@ Route::prefix('guest')->middleware(['auth', 'role:guest'])->group(function(){
 
     Route::post('/date/request', [ReservationController::class, 'post'])->name('guest.date.request');
 
-    Route::get('/reservations', [ReservationController::class, 'index']);
+    Route::get('/reservations', [ReservationController::class, 'index'])->name('guest.reservations');
     Route::post('/reservations/store', [ReservationController::class, 'store'])->name('guest.reservations.store');
  
     Route::get('/confirmation',function(){
