@@ -40,6 +40,7 @@ class ReservationController extends Controller
 
     public function store(ReservationFormRequest $request)
     {
+       
  
         try{
 

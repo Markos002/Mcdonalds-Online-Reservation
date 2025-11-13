@@ -9,7 +9,6 @@ use App\Services\Contracts\IReservationService;
 use App\Traits\CalculateFoodPrice;
 use App\Traits\GenerateReservationId;
 use App\Traits\GetAuthId;
-use Carbon\Carbon;
 use Exception;
 
 class ReservationService implements IReservationService
@@ -74,7 +73,7 @@ class ReservationService implements IReservationService
             'adults'         => $data['adults'],
             'kids'           => $data['kids'],
             'occasion'       => $data['occasion'],
-            'party_package'  => $data['party_package'],
+            'party_package'  => $data['party_package'] ?? null,
             'package_price'  => $data['package_price'],
             'grand_total'    => $foodTotal,
             'reservation_id' => $reservationId
