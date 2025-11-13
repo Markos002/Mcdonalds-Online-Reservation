@@ -23,10 +23,7 @@
                 <input type="hidden" id="selectedDate" name="date">
 
                 <!-- Time In -->
-                <x-dropdown id="timeIn" name="time_in" label="Time In" :options="[]" placeholder="Select..." />
-
-                <!-- Time Out -->
-                <x-dropdown id="timeOut" name="time_out" label="Time Out" :options="[]" placeholder="Select..." />
+                <x-dropdownoptions id="timeIn" name="time_in" label="Time In" :options="[]" placeholder="Select..." />
 
                 <div class="flex justify-end space-x-2 mt-4">
                     <button type="button" id="cancelBtn"
@@ -76,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (data.success && data.available) {
                     updateDropdown('timeIn', data.time_slots);
-                    updateDropdown('timeOut', data.time_slots);
 
                     modal.classList.remove('hidden');
                 } else if (data.success) {
@@ -125,15 +121,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const date = selectedDate.value;
         const timeInVal = document.getElementById('timeIn').value;
-        const timeOutVal = document.getElementById('timeOut').value;
 
-        if (!timeInVal || !timeOutVal) {
+        if (!timeInVal) {
             alert('Please select both Time In and Time Out.');
             return;
         }
 
         modal.classList.add('hidden');
-        console.log(`Selected date: ${date}, Time In: ${timeInVal}, Time Out: ${timeOutVal}`);
+        console.log(`Selected date: ${date}, Time In: ${timeInVal}`);
     });
 
     cancelBtn.addEventListener('click', () => modal.classList.add('hidden'));

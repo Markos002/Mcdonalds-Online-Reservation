@@ -15,15 +15,15 @@
 
                 <!-- Email Address -->
                 <div>
-                    <x-input-label for="email" :value="__('Email')" class="text-[#ffcc00]" />
-                    <x-text-input id="email" class="block mt-1 w-full rounded-md border-none focus:ring-[#ffcc00]" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                    <x-input-label for="email" :value="__('Email')" class="text-yellow-400" />
+                    <x-text-input id="email" class="block mt-1 w-full rounded-md border-none focus:ring-[#ffcc00] text-black" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-400" />
                 </div>
 
                 <!-- Password -->
                 <div>
-                    <x-input-label for="password" :value="__('Password')" class="text-[#ffcc00]" />
-                    <x-text-input id="password" class="block mt-1 w-full rounded-md border-none focus:ring-[#ffcc00]" type="password" name="password" required autocomplete="current-password" />
+                    <x-input-label for="password" :value="__('Password')" class="text-yellow-400" />
+                    <x-text-input id="password" class="text-black block mt-1 w-full rounded-md border-none focus:ring-[#ffcc00]" type="password" name="password" required autocomplete="current-password" />
                     <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-400" />
                 </div>
 

@@ -354,6 +354,20 @@
 
             </div>
 
+            <!-- FOOD PACKAGES (Full Width Below) -->
+            <div class="mt-8">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="bg-gradient-to-r from-[#C85A54] to-[#d67168] py-6 px-8">
+                        <h2 class="text-white text-2xl font-bold text-center">Select Your Food Packages</h2>
+                        <p class="text-white/90 text-center mt-2 text-sm">Choose meals for your guests</p>
+                    </div>
+                    <div class="p-8">
+                        {{-- Insert your full food packages component here --}}
+                        <p class="text-center text-gray-500 dark:text-gray-400">Food package selection component goes here</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Action Buttons -->
             <div class="mt-8 flex justify-between items-center">
                 <a href="" 
@@ -374,4 +388,4 @@
 
         </form>
     </div>
-</x-app-layout>
+</x-app-layout
