@@ -11,4 +11,11 @@ class PartyController extends Controller
     public function __construct(
         protected IPartyService $partyService
     ){}
+
+    public function index()
+    {
+        $pendingParties = $this->partyService->show();
+
+        return view('pages.admin.pendingparties',compact('pendingParties'));
+    }
 }

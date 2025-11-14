@@ -6,5 +6,6 @@ interface IPartyService
 {
 
 
-    
+    public function show();
+
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController\PartyController;
+use App\Http\Controllers\AdminController\PaymentPendingController;
 use App\Http\Controllers\GuestController\ReservationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GuestController\GuestDashboardController;
@@ -21,9 +23,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
     Route::get('/dashboard', function () {
         return view('/pages/admin/dashboard');
     })->name('admin.dashboard');
-    Route::get('/appointment', function () {
-        return view('/pages/admin/appointment');
-    })->name('admin.appointment');
+
+    Route::get('/appointment',[PaymentPendingController::class, 'index'])->name('admin.appointment');
+ 
+    Route::get('/pending-parties',[PartyController::class, 'index'])->name('admin.pendings-parties');
+   
     Route::get('/pending-parties', function () {
         return view('/pages/admin/pendingparties');
     })->name('admin.pending-parties');
