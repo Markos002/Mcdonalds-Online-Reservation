@@ -61,7 +61,7 @@ class GuestRepository implements IGuestRepository
     public function getOnGoingParties()
     {
         $paymentStatus = 'paid';
-        $partyStatus   = 'waiting';
+        $partyStatus   = 'ongoing';
 
         return Guest::whereHas('partyDetail', function ($query) use ($paymentStatus, $partyStatus) {
                 $query->where('payment_status', $paymentStatus)

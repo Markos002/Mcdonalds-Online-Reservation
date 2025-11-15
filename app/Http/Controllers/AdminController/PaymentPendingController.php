@@ -18,7 +18,9 @@ class PaymentPendingController extends Controller
 
         $pendingPayments = $this->paymentPendingService->show();
 
-        return view('pages.admin.appointment',compact('pendingPayments'));
+        return view('pages.admin.appointment',compact(
+            'pendingPayments'
+        ));
 
     }
 }

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('occasion', 100);
             $table->string('party_package', 100)->nullable();
             $table->string('special_req')->nullable();
-            $table->enum('party_status', ['finished','waiting','cancelled','pending'])->default('pending');
+            $table->enum('party_status', ['finished','ongoing','cancelled','pending'])->default('pending');
             $table->enum('payment_status', ['paid', 'unpaid'])->default('unpaid');
             $table->string('reservation_id')->nullable();
             $table->decimal('package_price', 8,2)->nullable();

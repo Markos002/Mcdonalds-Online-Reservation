@@ -16,6 +16,8 @@ class PartyController extends Controller
     {
         $pendingParties = $this->partyService->show();
 
-        return view('pages.admin.pendingparties',compact('pendingParties'));
+        return view('pages.admin.pendingparties',compact(
+            'pendingParties'
+        ));
     }
 }
