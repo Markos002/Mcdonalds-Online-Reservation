@@ -11,4 +11,8 @@ interface IPartyDetailRepository
     public function delete(int $id);
 
     public function getAvailablTimeSlot(string $date);
+
+    public function getReservationStatusOverView();
+    public function getSalesIncomeByYear($year);
+    public function getMonthlyReservationTrends($year);
 }

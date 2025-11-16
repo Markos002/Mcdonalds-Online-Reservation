@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Models\PartyDetail;
 use App\Repository\Contracts\IPartyDetailRepository;
+use Illuminate\Support\Facades\DB;
 
 
 class PartyDetailRepository implements IPartyDetailRepository
@@ -42,4 +43,46 @@ class PartyDetailRepository implements IPartyDetailRepository
             ->orderBy('check_in_time')
             ->get();     
     }
+
+    public function getReservationStatusOverView()
+    {
+        
+        return PartyDetail::selectRaw('
+            COUNT(CASE WHEN party_status = ? THEN 1 END)AS completed,
+            COUNT(CASE WHEN party_status = ? THEN 1 END)AS ongoing,
+            COUNT(CASE WHEN party_status = ? THEN 1 END)AS pending,
+            COUNT(CASE WHEN party_status = ? THEN 1 END)AS cancelled
+        ', ['finished', 'ongoing', 'pending', 'cancelled'])
+            ->whereYear('created_at', now()->year)
+            ->whereMonth('created_at', now()->month)
+            ->first();
+    }
+
+    public function getSalesIncomeByYear($year)
+    {
+        return PartyDetail::selectRaw('
+            DATE_FORMAT(created_at, "%b") AS month,
+            SUM(grand_total)AS totalIncome
+        ')
+          ->where('payment_status', 'paid')
+          ->whereYear('created_at', $year)
+          ->groupBy(DB::raw('MONTH(created_at)'))
+          ->orderBy(DB::raw('MONTH(created_at)'))
+          ->get();
+    }
+
+    public function getMonthlyReservationTrends($year)
+    {
+        return PartyDetail::selectRaw('
+            DATE_FORMAT(created_at, "%b") AS month,
+            COUNT(CASE WHEN party_status = "finished" THEN 1 END)AS completed,
+            COUNT(CASE WHEN party_status = "cancelled" THEN 1 END)AS cancelled
+        ')
+         ->whereYear('created_at', $year)
+         ->groupBy(DB::raw('MONTH(created_at)'))
+         ->orderBy(DB::raw('MONTH(created_at)'))
+         ->get();
+    }
+
+    
 }
