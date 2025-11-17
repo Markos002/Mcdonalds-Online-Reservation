@@ -48,11 +48,11 @@ class PartyDetailRepository implements IPartyDetailRepository
     {
         
         return PartyDetail::selectRaw('
-            COUNT(CASE WHEN party_status = ? THEN 1 END)AS completed,
-            COUNT(CASE WHEN party_status = ? THEN 1 END)AS ongoing,
-            COUNT(CASE WHEN party_status = ? THEN 1 END)AS pending,
-            COUNT(CASE WHEN party_status = ? THEN 1 END)AS cancelled
-        ', ['finished', 'ongoing', 'pending', 'cancelled'])
+            COUNT(CASE WHEN party_status = "finished"  THEN 1 END)AS completed,
+            COUNT(CASE WHEN party_status = "ongoing"   THEN 1 END)AS ongoing,
+            COUNT(CASE WHEN party_status = "pending"   THEN 1 END)AS pending,
+            COUNT(CASE WHEN party_status = "cancelled" THEN 1 END)AS cancelled
+        ',)
             ->whereYear('created_at', now()->year)
             ->whereMonth('created_at', now()->month)
             ->first();
@@ -60,15 +60,16 @@ class PartyDetailRepository implements IPartyDetailRepository
 
     public function getSalesIncomeByYear($year)
     {
-        return PartyDetail::selectRaw('
+       return PartyDetail::selectRaw('
+            MONTH(created_at) AS month_num,
             DATE_FORMAT(created_at, "%b") AS month,
-            SUM(grand_total)AS totalIncome
+            SUM(grand_total) AS totalIncome
         ')
-          ->where('payment_status', 'paid')
-          ->whereYear('created_at', $year)
-          ->groupBy(DB::raw('MONTH(created_at)'))
-          ->orderBy(DB::raw('MONTH(created_at)'))
-          ->get();
+        ->where('payment_status', 'paid')
+        ->whereYear('created_at', $year)
+        ->groupBy(DB::raw('MONTH(created_at)'), DB::raw('DATE_FORMAT(created_at, "%b")'))
+        ->orderBy('month_num')
+        ->get();
     }
 
     public function getMonthlyReservationTrends($year)
@@ -79,7 +80,7 @@ class PartyDetailRepository implements IPartyDetailRepository
             COUNT(CASE WHEN party_status = "cancelled" THEN 1 END)AS cancelled
         ')
          ->whereYear('created_at', $year)
-         ->groupBy(DB::raw('MONTH(created_at)'))
+         ->groupBy(DB::raw('MONTH(created_at)'), DB::raw('DATE_FORMAT(created_at, "%b")'))
          ->orderBy(DB::raw('MONTH(created_at)'))
          ->get();
     }

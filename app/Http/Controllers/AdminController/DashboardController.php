@@ -20,10 +20,10 @@ class DashboardController extends Controller
         $yearAvailable = range(2025, now()->year);
         $selectedYear  = (string)$year;
 
-        //$reservationOverview = $this->dashboardService->reservationStatusOverview();
+        $reservationOverview = $this->dashboardService->reservationStatusOverview();
         $salesIncome         = $this->dashboardService->salesIncomeByYear($year);
-        //$reservationTrends   = $this->dashboardService->monthlyReservationTrends($year);
-
+        $reservationTrends   = $this->dashboardService->monthlyReservationTrends($year);
+dd($reservationTrends);
         return view('pages.admin.dashboard',compact(
             //'reservationOverview',
             //'salesIncome',
