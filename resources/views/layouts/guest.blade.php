@@ -22,23 +22,12 @@
             <div class="w-72 h-72 bg-[#d9232e] rounded-2xl rotate-45"></div>
         </div>
 
-    @if (session('error'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg m-4" role="alert">
-                <strong class="font-semibold">Error:</strong>
-                <span class="block mt-1 text-sm">{{ session('error') }}</span>
-            </div>
-        @endif
-     @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg m-4" role="alert">
-                <strong class="font-semibold">Good Job:</strong>
-                <span class="block mt-1 text-sm">{{ session('success') }}</span>
-            </div>
-        @endif
+
         <a href="{{ route('home') }}" class="absolute top-6 left-6 flex items-center space-x-3">
             <img src="{{ asset('circle1.png') }}" alt="McDonald's Logo" class="w-10">
             <h1 class="text-xl font-semibold text-[#ffcc00]">McDonald's</h1>
         </a>
-
+        <x-sweetalert.alertmessage/>
         <!-- Login Container -->
         <div class="scroll-panel relative w-full max-w-md md:max-w-3xl py-6 sm:max-h-[80vh] lg:max-h-[300vh] overflow-y-auto p-5 pt-20">
             <div class="w-full bg-gray-800 rounded-lg">

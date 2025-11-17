@@ -51,6 +51,9 @@
     @if(auth()->check() && auth()->user()->role === 'guest')
     <nav class="flex-1 space-y-1 overflow-y-auto">
         <a href="{{ route('guest.dashboard') }} " class="flex items-center py-3 px-4 gap-3 text-gray-700 hover:bg-gray-200 rounded-md transition-colors {{ request()->routeIs('guest.dashboard') ? 'border-l-yellow-500 border-2 bg-gray-200' : '' }}">
+            <span class="font-medium">RESERVE</span>
+        </a>
+        <a href="{{ route('guest.dashboard') }} " class="flex items-center py-3 px-4 gap-3 text-gray-700 hover:bg-gray-200 rounded-md transition-colors {{ request()->routeIs('guest.dashboard') ? 'border-l-yellow-500 border-2 bg-gray-200' : '' }}">
             <span class="font-medium">MY RESERVATIONS</span>
         </a>
     </nav>

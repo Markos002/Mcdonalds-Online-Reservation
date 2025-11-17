@@ -192,4 +192,5 @@
         const price = selectedOption.getAttribute('data-price') || 0;
         priceField.value = price;
     }
+    
 </script>

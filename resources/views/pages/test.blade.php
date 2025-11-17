@@ -19,3 +19,6 @@
     <div id='calendar'></div>
   </body>
 </html>
+<div class="">
+            <x-analytics.bargraph-dashboard :data="$countAlignmentByCourse"/>
+        </div>

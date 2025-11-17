@@ -19,6 +19,7 @@
         <x-sidebar/>
         <div class="flex-1 flex flex-col  h-full">
             @include('layouts.navigation')
+            <x-sweetalert.alertmessage/>
 
             <!-- Page Content -->
             <main class="flex-1 p-6 overflow-y-auto">

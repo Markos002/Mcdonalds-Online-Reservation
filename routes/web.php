@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController\DashboardController;
 use App\Http\Controllers\AdminController\PartyController;
 use App\Http\Controllers\AdminController\PaymentPendingController;
 use App\Http\Controllers\GuestController\ReservationController;
@@ -20,17 +21,13 @@ Route::get('/test',function(){
 
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
-    Route::get('/dashboard', function () {
-        return view('/pages/admin/dashboard');
-    })->name('admin.dashboard');
+    Route::get('/dashboard',[DashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::get('/appointment',[PaymentPendingController::class, 'index'])->name('admin.appointment');
  
-    Route::get('/pending-parties',[PartyController::class, 'index'])->name('admin.pendings-parties');
+    Route::get('/pending-parties',[PartyController::class, 'index'])->name('admin.pending-parties');
    
-    Route::get('/pending-parties', function () {
-        return view('/pages/admin/pendingparties');
-    })->name('admin.pending-parties');
+
 });
 
 Route::prefix('guest')->middleware(['auth', 'role:guest'])->group(function(){

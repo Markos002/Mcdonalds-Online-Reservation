@@ -27,6 +27,7 @@
             <img src="{{ asset('circle1.png') }}" alt="McDonald's Logo" class="w-10">
             <h1 class="text-xl font-semibold text-white">McDonald's</h1>
         </a>
+        <x-sweetalert.alertmessage/>
 
         <!-- Login Container -->
         <div class="relative w-full max-w-md md:max-w-3xl px-8 py-6 overflow-y-auto">

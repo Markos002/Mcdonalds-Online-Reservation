@@ -51,14 +51,14 @@ function validateStep1() {
     const firstName = document.getElementById('first_name');
     const checkinDate = document.getElementById('check_in_date');
     const checkinTime = document.getElementById('check_in_time');
-    const checkoutTime = document.getElementById('check_out_time');
+    //const checkoutTime = document.getElementById('check_out_time');
     const adult = document.getElementById('adult'); // ✅ fixed ID mismatch
     const occasion = document.querySelector('input[name="occasion"]:checked');
 
     const isValid = firstName?.value.trim() &&
                     checkinDate?.value &&
                     checkinTime?.value &&
-                    checkoutTime?.value &&
+                    //checkoutTime?.value &&
                     adult?.value &&
                     occasion;
 
@@ -135,11 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const firstName = document.getElementById('first_name');
     const checkinDate = document.getElementById('check_in_date');
     const checkinTime = document.getElementById('check_in_time');
-    const checkoutTime = document.getElementById('check_out_time');
+    //const checkoutTime = document.getElementById('check_out_time');
     const adult = document.getElementById('adult');
     const occasionRadios = document.querySelectorAll('input[name="occasion"]');
 
-    [firstName, checkinDate, checkinTime, checkoutTime, adult].forEach(field => {
+    [firstName, checkinDate, checkinTime, /*checkoutTime*/, adult].forEach(field => {
         field?.addEventListener('input', validateStep1);
         field?.addEventListener('change', validateStep1);
     });
@@ -149,6 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDisabledOptions();
     validateStep1();
 });
+
+
+
 
 // Make functions globally accessible for inline HTML calls
 window.openModal = openModal;

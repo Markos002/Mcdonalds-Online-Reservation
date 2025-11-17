@@ -58,8 +58,16 @@ document.addEventListener('DOMContentLoaded', function() {
         initialView: 'dayGridMonth',
         selectable: true,
         height: 'auto',
-
+        validRange: {
+                start: new Date().toISOString().split("T")[0]
+            },
         dateClick: function(info) {
+            const today = new Date().toISOString().split("T")[0];
+
+            if (info.dateStr < today) {
+                alert("You cannot reserve a past date.");
+                return;
+            }
             const date = info.dateStr;
             selectedDate.value = date;
 

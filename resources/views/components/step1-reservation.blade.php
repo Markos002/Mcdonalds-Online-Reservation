@@ -15,11 +15,13 @@
                 <label for="first_name" class="block text-sm font-medium mb-2 dark:text-gray-200">First Name</label>
                 <input type="text" id="first_name" name="first_name" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <x-input-error :messages="$errors->get('first_name')" class="mt-2 text-red-400" />
             </div>
             <div>
                 <label for="last_name" class="block text-sm font-medium mb-2 dark:text-gray-200">Last Name</label>
                 <input type="text" id="last_name" name="last_name"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <x-input-error :messages="$errors->get('last_name')" class="mt-2 text-red-400" />    
             </div>
         </div>
 
@@ -28,6 +30,7 @@
             <label for="address" class="block text-sm font-medium mb-2 dark:text-gray-200">Permanent Address</label>
             <input type="text" id="address" name="address"
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <x-input-error :messages="$errors->get('address')" class="mt-2 text-red-400" />
         </div>
 
         <!-- City and Zip Code Row -->
@@ -36,6 +39,7 @@
                 <label for="city" class="block text-sm font-medium mb-2 dark:text-gray-200">City</label>
                 <input type="text" id="city" name="city"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <x-input-error :messages="$errors->get('city')" class="mt-2 text-red-400" />
             </div>
             <div>
                 <label for="zip_code" class="block text-sm font-medium mb-2 dark:text-gray-200">Zip Code</label>
@@ -44,6 +48,7 @@
                     maxlength="4"
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <x-input-error :messages="$errors->get('zip_code')" class="mt-2 text-red-400" />
             </div>
         </div>
 
@@ -54,16 +59,18 @@
                 <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" maxlength="11"
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <x-input-error :messages="$errors->get('phone')" class="mt-2 text-red-400" />
             </div>
             <div>
                 <label for="email" class="block text-sm font-medium mb-2 dark:text-gray-200">Email Address</label>
                 <input type="email" id="email" name="email"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-400" />
             </div>
         </div>
 
         <!-- Check-in Date, Times, Adult, Children Row -->
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+        <div class="grid grid-cols-2 gap-4 mb-6">
             <div>
                 <label for="check_in_date" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-in Date</label>
                     <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white" name="check_in_date" id="check_in_date" value="{{ $date }}" readonly>        
@@ -72,28 +79,20 @@
                 <label for="check_in_time" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-in Time</label>
                     <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white" name="check_in_time" id="check_in_time" value="{{ $timeIn }}" readonly>        
             </div>
-            <div>
-                <label for="check_out_time" class="block text-sm font-medium mb-2 dark:text-gray-200">Check-out
-                    Time</label>
-                <select id="check_out_time" name="check_out_time"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option value=""></option>
-                    <option value="morning">Morning</option>
-                    <option value="afternoon">Afternoon</option>
-                    <option value="evening">Evening</option>
-                </select>
-            </div>
+
             <div>
                 <label for="adult" class="block text-sm font-medium mb-2 dark:text-gray-200">Adult</label>
                 <input type="number" id="adult" name="adults" maxlength="11"
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <x-input-error :messages="$errors->get('adult')" class="mt-2 text-red-400" />
             </div>
             <div>
                 <label for="kids" class="block text-sm font-medium mb-2 dark:text-gray-200">Children</label>
                 <input type="number" id="kids" name="kids" maxlength="11"
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:border-transparent outline-none bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <x-input-error :messages="$errors->get('kids')" class="mt-2 text-red-400" />
             </div>
         </div>
 
