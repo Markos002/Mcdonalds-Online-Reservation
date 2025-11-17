@@ -55,7 +55,7 @@ class GuestRepository implements IGuestRepository
                 'guest_id',
                 DB::raw("CONCAT(first_name, ' ', last_name) AS customer")
             )
-            ->paginate(10);
+            ->get();
     }
 
     public function getOnGoingParties()

@@ -23,7 +23,7 @@ Route::get('/test',function(){
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
     Route::get('/dashboard',[DashboardController::class, 'index'])->name('admin.dashboard');
 
-    Route::get('/appointment',[PaymentPendingController::class, 'index'])->name('admin.appointment');
+    Route::get('/appointments',[PaymentPendingController::class, 'index'])->name('admin.appointment');
  
     Route::get('/pending-parties',[PartyController::class, 'index'])->name('admin.pending-parties');
    
