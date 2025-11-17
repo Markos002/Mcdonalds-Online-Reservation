@@ -4,9 +4,7 @@
             {{ __('PAYMENT PENDING') }}
         </h2>
     </x-slot>
-    @php
-        dd($pendingPayments);
-    @endphp
+
         <h2 class="text-xl font-semibold text-gray-700 mb-4">Sales Information</h2>
 
         <!-- Search -->
@@ -24,22 +22,18 @@
 
         :rows="$pendingPayments->map(function($payment) {
             return [
-                'id' => $payment->guest_id,
-                //'date' => $payment->created_at->format('F j, Y'),
-                'customer' => $payment->customer
-                //'payable_amount' => '₱ ' . number_format($payment->payable_amount, 2),
+                'id' => $payment->partyDetail->reservation_id,
+                'date' => $payment->partyDetail->created_at->format('F j, Y'),
+                'customer' => $payment->customer,
+                'payable_amount' => '₱ ' . number_format($payment->partyDetail->grand_total, 2),
             ];
         })"
-
+        @php
+            dd($pendingPayments);
+        @endphp
         :actions="collect([
             [
-                ['label' => 'Edit', 'type' => 'edit', 'url' => '#'],
-            ],
-            [
-                ['label' => 'Edit', 'type' => 'edit', 'url' => '#'],
-            ],
-            [   
-                ['label' => 'Edit', 'type' => 'edit', 'url' => '#'],
+                ['label' => 'Edit', 'type' => 'edit', 'url' => ''],
             ],
         ])"
 

@@ -170,7 +170,7 @@
                                 
                                 <div class="space-y-6">
                                     <!-- Date & Time -->
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div class="relative">
                                             <label for="check_in_date" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-200">
                                                 Check-in Date
@@ -183,18 +183,6 @@
                                                 Check-in Time
                                             </label>
                                             <select id="check_in_time" name="check_in_time"
-                                                class="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-[#C85A54]/20 focus:border-[#C85A54] outline-none transition-all bg-white dark:bg-gray-700 dark:text-white appearance-none cursor-pointer">
-                                                <option value="">Select time...</option>
-                                                <option value="morning">🌅 Morning</option>
-                                                <option value="afternoon">☀️ Afternoon</option>
-                                                <option value="evening">🌙 Evening</option>
-                                            </select>
-                                        </div>
-                                        <div class="relative">
-                                            <label for="check_out_time" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-200">
-                                                Check-out Time
-                                            </label>
-                                            <select id="check_out_time" name="check_out_time"
                                                 class="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-[#C85A54]/20 focus:border-[#C85A54] outline-none transition-all bg-white dark:bg-gray-700 dark:text-white appearance-none cursor-pointer">
                                                 <option value="">Select time...</option>
                                                 <option value="morning">🌅 Morning</option>
@@ -293,8 +281,7 @@
                                         <div class="flex items-center gap-3">
                                             <span class="text-3xl">🦸</span>
                                             <div>
-                                                <p class="font-semibold text-gray-900 dark:text-white">Superheroes</p>
-                                                <p class="text-xs text-gray-500">Action-packed fun</p>
+                                                <p class="font-semibold text-gray-900 dark:text-white">Madagascar </p>
                                             </div>
                                         </div>
                                     </div>
@@ -305,8 +292,7 @@
                                         <div class="flex items-center gap-3">
                                             <span class="text-3xl">👑</span>
                                             <div>
-                                                <p class="font-semibold text-gray-900 dark:text-white">Princess</p>
-                                                <p class="text-xs text-gray-500">Royal celebration</p>
+                                                <p class="font-semibold text-gray-900 dark:text-white">Happy</p>
                                             </div>
                                         </div>
                                     </div>
@@ -317,8 +303,18 @@
                                         <div class="flex items-center gap-3">
                                             <span class="text-3xl">🚀</span>
                                             <div>
-                                                <p class="font-semibold text-gray-900 dark:text-white">Space Adventure</p>
-                                                <p class="text-xs text-gray-500">Out of this world</p>
+                                                <p class="font-semibold text-gray-900 dark:text-white">Cocomelon</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="block cursor-pointer">
+                                    <input type="radio" name="theme" value="space" class="peer sr-only">
+                                    <div class="p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl hover:border-blue-500 transition-all peer-checked:border-blue-500 peer-checked:bg-blue-50 dark:peer-checked:bg-blue-900/20">
+                                        <div class="flex items-center gap-3">
+                                            <span class="text-3xl">🚀</span>
+                                            <div>
+                                                <p class="font-semibold text-gray-900 dark:text-white">My Little Pony</p>
                                             </div>
                                         </div>
                                     </div>
@@ -354,34 +350,20 @@
 
             </div>
 
-            <!-- FOOD PACKAGES (Full Width Below) -->
-            <div class="mt-8">
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
-                    <div class="bg-gradient-to-r from-[#C85A54] to-[#d67168] py-6 px-8">
-                        <h2 class="text-white text-2xl font-bold text-center">Select Your Food Packages</h2>
-                        <p class="text-white/90 text-center mt-2 text-sm">Choose meals for your guests</p>
-                    </div>
-                    <div class="p-8">
-                        {{-- Insert your full food packages component here --}}
-                        <p class="text-center text-gray-500 dark:text-gray-400">Food package selection component goes here</p>
-                    </div>
-                </div>
-            </div>
-
             <!-- Action Buttons -->
             <div class="mt-8 flex justify-between items-center">
                 <a href="" 
                     class="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-xl font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all">
-                    Cancel
+                    Back
                 </a>
                 <div class="flex gap-4">
                     <button type="button" 
                         class="px-6 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-600 transition-all">
-                        Save as Draft
+                        Cancel Reservation
                     </button>
                     <button type="submit" 
                         class="px-8 py-3 bg-gradient-to-r from-[#C85A54] to-[#d67168] text-white rounded-xl font-bold shadow-lg shadow-[#C85A54]/30 hover:shadow-xl hover:shadow-[#C85A54]/40 transition-all">
-                        Update Reservation
+                        Accept Reservation
                     </button>
                 </div>
             </div>

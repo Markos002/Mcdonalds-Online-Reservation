@@ -1,12 +1,12 @@
 @props(['data' => []])
 
-<div class="container mx-auto p-3 bg-white rounded-md mt-5 overflow-x-auto">
-    <div class="min-w-[900px] md:min-w-[800px] lg:min-w-full">
+<div class="bg-white p-5 border rounded mb-8">
+    <div class="min-w-[700px] md:min-w-[600px] lg:min-w-full">
         <div id="salesChart" style="height: 400px; width: 100%;"></div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -18,31 +18,26 @@ document.addEventListener('DOMContentLoaded', function () {
     const chartData = @json($data);
 
     const formattedData = chartData.map(item => ({
-        product: item.course, 
-        'Completed': item.completed ?? 0,
-        'Cancelled': item.cancelled ?? 0,
+        Month: item.month,    
+        Completed: item.completed ?? 0,
+        Cancelled: item.cancelled ?? 0
     }));
 
     var option = {
         color: ['#8FE5A6', '#FFE83A'],
-        tooltip: {},
+        tooltip: { trigger: 'axis' },
         legend: {
-            orient: 'vertical',  
-            right: 10,           
-            top: 'center',      
-            textStyle: {
-                color: '#333',
-                fontSize: 12
-            }
+            orient: 'vertical',
+            right: 10,
+            top: 'center',
+            textStyle: { color: '#333', fontSize: 12 }
         },
         dataset: {
-            dimensions: ['status', 'Completed', 'Cancelled'],
+            dimensions: ['Month', 'Completed', 'Cancelled'],
             source: formattedData
         },
-        grid: {
-            right: '20%' 
-        },
-        xAxis: { type: 'category' },
+        grid: { right: '20%' },
+        xAxis: { type: 'category' },  
         yAxis: {},
         series: [
             { type: 'bar' },

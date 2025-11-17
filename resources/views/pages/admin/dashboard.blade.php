@@ -6,7 +6,7 @@
     </x-slot>
 
     {{-- Page Actions --}}
-    <div class="flex flex-wrap items-center gap-3 p-4">
+    <div class="flex justify-end flex-wrap items-center gap-3 p-4">
 
         {{-- Filter Form --}}
         <form id="dashboardFilterForm" 
@@ -35,8 +35,29 @@
             </x-dropdown>
 
         </form>
-        
     </div>
+    <!-- Reservation Overview -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div class="p-5 bg-white border rounded shadow">
+            <h3 class="text-gray-600 text-sm">Pending</h3>
+            <p class="text-3xl font-bold">{{ $reservationOverview['pending'] }}</p>
+        </div>
+        <div class="p-5 bg-white border rounded shadow">
+            <h3 class="text-gray-600 text-sm">Ongoing</h3>
+            <p class="text-3xl font-bold">{{ $reservationOverview['ongoing'] }}</p>
+        </div>
+        <div class="p-5 bg-white border rounded shadow">
+            <h3 class="text-gray-600 text-sm">Completed</h3>
+            <p class="text-3xl font-bold">{{ $reservationOverview['completed'] }}</p>
+        </div>
+        <div class="p-5 bg-white border rounded shadow">
+            <h3 class="text-gray-600 text-sm">Cancelled</h3>
+            <p class="text-3xl font-bold">{{ $reservationOverview['cancelled'] }}</p>
+        </div>
+    </div>
+    <x-analytics.bargraph :data="$reservationTrends"/>
+
+    <x-analytics.line :data="$salesIncome"/>
 </x-app-layout>
 
 <script>

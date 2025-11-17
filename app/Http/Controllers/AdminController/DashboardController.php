@@ -23,11 +23,11 @@ class DashboardController extends Controller
         $reservationOverview = $this->dashboardService->reservationStatusOverview();
         $salesIncome         = $this->dashboardService->salesIncomeByYear($year);
         $reservationTrends   = $this->dashboardService->monthlyReservationTrends($year);
-
+        //dd($salesIncome);
         return view('pages.admin.dashboard',compact(
-            //'reservationOverview',
-            //'salesIncome',
-            //'reservationTrends',
+            'reservationOverview',
+            'salesIncome',
+            'reservationTrends',
             'yearAvailable',    
             'selectedYear'
         ));
