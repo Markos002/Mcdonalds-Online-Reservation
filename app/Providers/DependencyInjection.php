@@ -11,6 +11,7 @@ use App\Repository\GuestRepository;
 use App\Repository\PartyDetailRepository;
 use App\Repository\UserRepository;
 use App\Services\Contracts\IDashboardService;
+use App\Services\Contracts\IGuestReservationAmendService;
 use App\Services\Contracts\IPartyService;
 use App\Services\Contracts\IPaymentPendingService;
 use App\Services\Contracts\IRecordRegistryService;
@@ -23,6 +24,7 @@ use App\Services\RecordRegistryService;
 use App\Services\ReservationService;
 use App\Services\Contracts\IGenerateSessionService;
 use App\Services\DashboardReportService;
+use App\Services\GuestReservationAmendService;
 use App\Services\TimeSlotAvailability;
 use Illuminate\Support\ServiceProvider;
 
@@ -47,6 +49,7 @@ class DependencyInjection extends ServiceProvider
         $this->app->bind(IRecordRegistryService::class, RecordRegistryService::class);
         $this->app->bind(ITimeSlotAvailability::class, TimeSlotAvailability::class);
         $this->app->bind(IDashboardService::class, DashboardReportService::class);
+        $this->app->bind(IGuestReservationAmendService::class, GuestReservationAmendService::class);
     }
 
     /**

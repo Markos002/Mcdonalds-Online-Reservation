@@ -17,9 +17,5 @@ class PaymentPendingService implements IPaymentPendingService
         return $this->guestRepository->getPendingPayments();
     }
 
-    public function update()
-    {
-
-
-    }
+    
 }

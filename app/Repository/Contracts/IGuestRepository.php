@@ -9,8 +9,11 @@ interface IGuestRepository
     public function find(int $id);
     public function update(int $id, array $data);
     public function delete($id);
+
     public function getPendingPayments();
     public function getOnGoingParties();
     public function getRecords();
+
+    public function findGuestReservationForEdit($guestId);
 
 }

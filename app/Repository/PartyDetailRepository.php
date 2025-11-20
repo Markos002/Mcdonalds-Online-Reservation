@@ -85,5 +85,11 @@ class PartyDetailRepository implements IPartyDetailRepository
          ->get();
     }
 
+    public function findGuestReservationIfNotPending($guestId)
+    {
+        return PartyDetail::where('party_status', 'pending')
+               ->find($guestId);
+                  
+    }
     
 }

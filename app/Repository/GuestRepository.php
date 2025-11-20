@@ -103,7 +103,17 @@ class GuestRepository implements IGuestRepository
             )
             ->paginate(10);        
     }
-
     
-    
+   
+    public function findGuestReservationForEdit($guestId)
+    {
+        return Guest::with([
+            'partyDetail'=>function($query){
+                $query->where('party_status', 'pending');
+            },
+            'foodPack'
+        ])
+        ->where('guest_id', $guestId)
+        ->first();
+    }
 }
