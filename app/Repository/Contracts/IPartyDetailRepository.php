@@ -17,4 +17,6 @@ interface IPartyDetailRepository
     public function getMonthlyReservationTrends($year);
 
     public function findGuestReservationIfNotPending($guestId);
+
+    public function getReservationRecordHistory();
 }

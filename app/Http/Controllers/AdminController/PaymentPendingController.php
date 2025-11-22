@@ -5,8 +5,8 @@ namespace App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\IGuestReservationAmendService;
 use App\Services\Contracts\IPaymentPendingService;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 class PaymentPendingController extends Controller
 {
@@ -21,7 +21,7 @@ class PaymentPendingController extends Controller
     {
 
         $pendingPayments = $this->paymentPendingService->show();
-        //dd($pendingPayments);
+        
         return view('pages.admin.appointment',compact(
             'pendingPayments'
         ));

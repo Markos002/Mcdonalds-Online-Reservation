@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController\DashboardController;
 use App\Http\Controllers\AdminController\PartyController;
 use App\Http\Controllers\AdminController\PaymentPendingController;
+use App\Http\Controllers\AdminController\ReservationHistoryController;
 use App\Http\Controllers\GuestController\ReservationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GuestController\GuestDashboardController;
@@ -27,7 +28,13 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
  
     Route::get('/pending-parties',[PartyController::class, 'index'])->name('admin.pending-parties');
 
+    Route::get('/reservation-edit',[PartyController::class, 'edit']);
+
+    Route::put('/reservation-update',[PartyController::class, 'update'])->name('admin.reservation.update');
+
     Route::get('/reservation/{guestId}/edit',[PaymentPendingController::class, 'edit'])->name('admin.reservation-edit');
+
+    Route::get('/reservation-history',[ReservationHistoryController::class, 'index']);
    
 
 });

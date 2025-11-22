@@ -91,5 +91,22 @@ class PartyDetailRepository implements IPartyDetailRepository
                ->find($guestId);
                   
     }
+
+    public function getReservationRecordHistory()
+    {
+        return PartyDetail::select(
+                    'party_dtl_id',
+                    'check_in_date',
+                    DB::raw("CONCAT(check_in_time, ' - ', check_out_time)AS check_period"),
+                    'time_extend AS extended_time',
+                    'occasion',
+                    'party_package',
+                    'party_status',
+                    'payment_status',
+                    'reservation_id',
+                    'grand_total'
+            )
+                ->paginate(7);
+    }
     
 }

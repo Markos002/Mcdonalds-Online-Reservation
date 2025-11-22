@@ -3,17 +3,19 @@
 namespace App\Services;
 
 use App\Repository\Contracts\IGuestRepository;
+use App\Repository\Contracts\IPartyDetailRepository;
 use App\Services\Contracts\IRecordRegistryService;
 
 class RecordRegistryService implements  IRecordRegistryService
 {
 
     public function __construct(
-        protected IGuestRepository $guestRepository
+        protected IGuestRepository $guestRepository,
+        protected IPartyDetailRepository $partyDetailRepository,
     ){}
 
-    public function show()
+    public function reservationHitory()
     {
-        return $this->guestRepository->getRecords();
+       return $this->partyDetailRepository->getReservationRecordHistory();
     }
 }
