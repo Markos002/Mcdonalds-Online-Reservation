@@ -43,7 +43,7 @@
             ],
         ])"
 
-        empty-message="No sales records found"
+        empty-message="No pending parties as of now"
     />
 
 </x-app-layout>

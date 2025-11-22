@@ -15,5 +15,9 @@ class ReservationHistoryController extends Controller
     public function index()
     {
         $reservationHistory = $this->recordRegistryService->reservationHitory();
+        //dd($reservationHistory);
+        return view('pages.admin.history',compact(
+            'reservationHistory'
+        ));
     }
 }

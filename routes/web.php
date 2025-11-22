@@ -34,7 +34,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
 
     Route::get('/reservation/{guestId}/edit',[PaymentPendingController::class, 'edit'])->name('admin.reservation-edit');
 
-    Route::get('/reservation-history',[ReservationHistoryController::class, 'index']);
+    Route::get('/reservation-history',[ReservationHistoryController::class, 'index'])->name('admin.reservation-history');
    
 
 });
