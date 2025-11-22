@@ -73,6 +73,9 @@ class GuestRepository implements IGuestRepository
                     'reservation_id',
                     'occasion',
                     'created_at',
+                    'check_in_date',
+                    'party_status',
+                    'payment_status'
                 )
                 ->where('payment_status', $paymentStatus)
                 ->where('party_status', $partyStatus);

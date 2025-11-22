@@ -151,7 +151,53 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form'); 
 
+    form.addEventListener('submit', function (e) {
+        // Filter out empty add-ons
+        document.querySelectorAll('.addons-select').forEach(select => {
+            const row = select.closest('.flex');
+            if (!row) return;
+
+            const qtyInput = row.querySelector('.addon-qty');
+            const addonName = select.value || '';
+            const qty = parseInt(qtyInput.value) || 0;
+
+            // Remove if no selection OR quantity is 0
+            if (!addonName || qty === 0) {
+                row.querySelectorAll('select, input').forEach(el => el.remove());
+            }
+        });
+
+        // Filter out packages with quantity 0
+        document.querySelectorAll('[name^="food_packages"][name$="[quantity]"]').forEach(input => {
+            const qty = parseInt(input.value) || 0;
+            
+            if (qty === 0) {
+                const match = input.name.match(/\[(\d+)\]/);
+                if (!match) return;
+                const index = match[1];
+                document.querySelectorAll(`[name^="food_packages[${index}]"]`).forEach(el => el.remove());
+            }
+        });
+    });
+});
+
+document.getElementById('search').addEventListener('keyup', function() {
+        let searchValue = this.value.toLowerCase();
+        let rows = document.querySelectorAll("table tbody tr");
+
+        rows.forEach(row => {
+            let rowText = row.textContent.toLowerCase();
+
+            if (rowText.includes(searchValue)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
 
 // Make functions globally accessible for inline HTML calls
 window.openModal = openModal;

@@ -27,7 +27,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
  
     Route::get('/pending-parties',[PartyController::class, 'index'])->name('admin.pending-parties');
 
-    Route::get('/reservation/{guestId}/edit',[PaymentPendingController::class, 'edit']);
+    Route::get('/reservation/{guestId}/edit',[PaymentPendingController::class, 'edit'])->name('admin.reservation-edit');
    
 
 });

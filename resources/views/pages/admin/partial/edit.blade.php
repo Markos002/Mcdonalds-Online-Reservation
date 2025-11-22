@@ -11,35 +11,64 @@
             </div>
         </div>
     </x-slot>
+    @php
+        $foodPackages = [
+            [
+                'name' => 'Food Package 1',
+                'image' => 'images/package1.png',
+                'price' => 149,
+                'items' => ['1pc Chicken McDo with McDoSpaghetti','12oz Coke'],
+                'color' => 'from-blue-300 to-blue-400',
+                'textColor' => 'text-blue-600',
+                'category' => 'adults',
+            ],
+            [
+                'name' => 'Food Package 2',
+                'image' => 'images/package2.png',
+                'price' => 199,
+                'items' => ['1pc Chicken McDo with Rice','Medium Fries','Apple Pie','16oz Coke'],
+                'color' => 'from-blue-300 to-blue-400',
+                'textColor' => 'text-blue-600',
+                'category' => 'adults',
+            ],
+            [
+                'name' => 'Food Package 3',
+                'image' => 'images/package3.png',
+                'price' => 259,
+                'items' => ['1pc Chicken McDo with McDoSpaghetti', 'Medium Fries', '16oz Coke'],
+                'color' => 'from-blue-300 to-blue-400',
+                'textColor' => 'text-blue-600',
+                'category' => 'adults',
+            ],
+            [
+                'name' => 'Food Package 4',
+                'image' => 'images/package4.png',
+                'price' => 219,
+                'items' => ['4pc Chicken McNuggets with Rice', 'Regular Fries', '12oz Orange Juice', 'Sundae','Happy Meal Toy'],
+                'color' => 'from-pink-200 to-pink-300',
+                'textColor' => 'text-pink-600',
+                'category' => 'kids',
+            ],
+            [
+                'name' => 'Food Package 5',
+                'image' => 'images/package5.png',
+                'price' => 279,
+                'items' => ['1pc Chicken McDo with McDoSpaghetti', 'Regular Fries', '12oz Orange Juice', 'Sundae','Happy Meal Toy'],
+                'color' => 'from-pink-200 to-pink-300',
+                'textColor' => 'text-pink-600',
+                'category' => 'kids',
+            ]
+        ];
 
+            $addonsOptions = [
+                ['label' => '₱59 php - Regular Fries', 'value' => 'fries', 'price' => 59],
+                ['label' => '₱150 php - Big Mac', 'value' => 'bigmac', 'price' => 150],
+                ['label' => '₱52 php - Coke Float', 'value' => 'cokefloat', 'price' => 52],
+            ];
+
+            $addonRows = 3; 
+    @endphp
     <div class="py-8 px-6 max-w-[1600px] mx-auto">
-        
-        <!-- Progress Indicator -->
-        <div class="mb-8">
-            <div class="flex items-center justify-between max-w-2xl mx-auto">
-                <div class="flex flex-col items-center gap-2">
-                    <div class="w-12 h-12 rounded-full bg-[#C85A54] flex items-center justify-center text-white font-bold shadow-lg">
-                        1
-                    </div>
-                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Details</span>
-                </div>
-                <div class="flex-1 h-1 bg-gray-300 dark:bg-gray-600 mx-4"></div>
-                <div class="flex flex-col items-center gap-2">
-                    <div class="w-12 h-12 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-gray-600 dark:text-gray-400 font-bold">
-                        2
-                    </div>
-                    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Theme</span>
-                </div>
-                <div class="flex-1 h-1 bg-gray-300 dark:bg-gray-600 mx-4"></div>
-                <div class="flex flex-col items-center gap-2">
-                    <div class="w-12 h-12 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-gray-600 dark:text-gray-400 font-bold">
-                        3
-                    </div>
-                    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Food</span>
-                </div>
-            </div>
-        </div>
-
         <form method="POST" action="">
             @csrf
             @method('PUT')
@@ -78,7 +107,9 @@
                                         </label>
                                         <input type="text" id="first_name" name="first_name" required
                                             class="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-[#C85A54]/20 focus:border-[#C85A54] outline-none transition-all bg-white dark:bg-gray-700 dark:text-white placeholder-gray-400"
-                                            placeholder="Enter first name">
+                                            placeholder="Enter first name"
+                                            value="{{ old('first_name', $guestData->first_name )}}">
+                                            
                                     </div>
                                     <div class="relative">
                                         <label for="last_name" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-200">
@@ -86,7 +117,8 @@
                                         </label>
                                         <input type="text" id="last_name" name="last_name"
                                             class="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-[#C85A54]/20 focus:border-[#C85A54] outline-none transition-all bg-white dark:bg-gray-700 dark:text-white placeholder-gray-400"
-                                            placeholder="Enter last name">
+                                            placeholder="Enter last name"
+                                            value="{{ old('last_name', $guestData->last_name )}}">
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +137,8 @@
                                         </label>
                                         <input type="text" id="address" name="address"
                                             class="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-[#C85A54]/20 focus:border-[#C85A54] outline-none transition-all bg-white dark:bg-gray-700 dark:text-white placeholder-gray-400"
-                                            placeholder="Street address, P.O. box">
+                                            placeholder="Street address, P.O. box"
+                                            value="{{ old('address', $guestData->address )}}">
                                     </div>
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -115,7 +148,8 @@
                                             </label>
                                             <input type="text" id="city" name="city"
                                                 class="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-[#C85A54]/20 focus:border-[#C85A54] outline-none transition-all bg-white dark:bg-gray-700 dark:text-white placeholder-gray-400"
-                                                placeholder="City name">
+                                                placeholder="City name"
+                                                value="{{ old('city', $guestData->city )}}">
                                         </div>
                                         <div class="relative">
                                             <label for="zip_code" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-200">
@@ -125,7 +159,8 @@
                                                 maxlength="4" pattern="\d{4}"
                                                 oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"
                                                 class="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-[#C85A54]/20 focus:border-[#C85A54] outline-none transition-all bg-white dark:bg-gray-700 dark:text-white placeholder-gray-400"
-                                                placeholder="0000">
+                                                placeholder="0000"
+                                                value="{{ old('zip_code', $guestData->zip_code )}}">
                                         </div>
                                     </div>
 
@@ -141,9 +176,11 @@
                                                 <input type="tel" id="phone" name="phone" maxlength="11"
                                                     oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,11)"
                                                     class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-[#C85A54]/20 focus:border-[#C85A54] outline-none transition-all bg-white dark:bg-gray-700 dark:text-white placeholder-gray-400"
-                                                    placeholder="09123456789">
+                                                    placeholder="09123456789"
+                                                    value="{{ old('phone', $guestData->phone )}}">
                                             </div>
                                         </div>
+                                        <!--
                                         <div class="relative">
                                             <label for="email" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-200">
                                                 Email Address
@@ -157,6 +194,7 @@
                                                     placeholder="you@example.com">
                                             </div>
                                         </div>
+                                        -->
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +207,7 @@
                                 </h3>
                                 
                                 <div class="space-y-6">
-                                    <!-- Date & Time -->
+                                    <!-- Date & Time
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div class="relative">
                                             <label for="check_in_date" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-200">
@@ -191,7 +229,7 @@
                                             </select>
                                         </div>
                                     </div>
-
+                                    -->
                                     <!-- Guest Count -->
                                     <div class="grid grid-cols-2 gap-6">
                                         <div class="relative">
@@ -200,7 +238,8 @@
                                             </label>
                                             <input type="number" id="adult" name="adults" min="0"
                                                 class="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-[#C85A54]/20 focus:border-[#C85A54] outline-none transition-all bg-white dark:bg-gray-700 dark:text-white"
-                                                placeholder="0">
+                                                placeholder="0"
+                                                value="{{ old('adult',$guestData->partyDetail->adults)}}">
                                         </div>
                                         <div class="relative">
                                             <label for="kids" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-200">
@@ -208,7 +247,8 @@
                                             </label>
                                             <input type="number" id="kids" name="kids" min="0"
                                                 class="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-[#C85A54]/20 focus:border-[#C85A54] outline-none transition-all bg-white dark:bg-gray-700 dark:text-white"
-                                                placeholder="0">
+                                                placeholder="0"
+                                                value="{{ old('adult',$guestData->partyDetail->kids)}}">
                                         </div>
                                     </div>
                                 </div>
@@ -223,28 +263,24 @@
                                 
                                 <div class="flex flex-wrap gap-4">
                                     <label class="cursor-pointer group">
-                                        <input type="radio" name="occasion" value="birthday" class="peer sr-only">
+                                        <input type="radio" name="occasion" value="birthday" class="peer sr-only" 
+                                        {{ old('occasion', $guestData->partyDetail->occasion) === 'birthday' ? 'checked' : '' }}>
                                         <div class="px-6 py-3.5 bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-xl flex items-center gap-3 transition-all peer-checked:bg-gradient-to-r peer-checked:from-[#C85A54] peer-checked:to-[#d67168] peer-checked:border-[#C85A54] peer-checked:shadow-lg peer-checked:shadow-[#C85A54]/30 hover:border-[#C85A54]/50">
                                             <span class="text-2xl">🎂</span>
                                             <span class="font-semibold text-gray-700 dark:text-gray-200 peer-checked:text-white group-has-[:checked]:text-white">Birthday Party</span>
                                         </div>
                                     </label>
                                     <label class="cursor-pointer group">
-                                        <input type="radio" name="occasion" value="business" class="peer sr-only">
+                                        <input type="radio" name="occasion" value="business" class="peer sr-only"
+                                        {{ old('occasion', $guestData->partyDetail->occasion) === 'business' ? 'checked' : '' }}>
                                         <div class="px-6 py-3.5 bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-xl flex items-center gap-3 transition-all peer-checked:bg-gradient-to-r peer-checked:from-[#C85A54] peer-checked:to-[#d67168] peer-checked:border-[#C85A54] peer-checked:shadow-lg peer-checked:shadow-[#C85A54]/30 hover:border-[#C85A54]/50">
                                             <span class="text-2xl">💼</span>
                                             <span class="font-semibold text-gray-700 dark:text-gray-200 peer-checked:text-white group-has-[:checked]:text-white">Business Meeting</span>
                                         </div>
                                     </label>
                                     <label class="cursor-pointer group">
-                                        <input type="radio" name="occasion" value="wedding" class="peer sr-only">
-                                        <div class="px-6 py-3.5 bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-xl flex items-center gap-3 transition-all peer-checked:bg-gradient-to-r peer-checked:from-[#C85A54] peer-checked:to-[#d67168] peer-checked:border-[#C85A54] peer-checked:shadow-lg peer-checked:shadow-[#C85A54]/30 hover:border-[#C85A54]/50">
-                                            <span class="text-2xl">💒</span>
-                                            <span class="font-semibold text-gray-700 dark:text-gray-200 peer-checked:text-white group-has-[:checked]:text-white">Wedding</span>
-                                        </div>
-                                    </label>
-                                    <label class="cursor-pointer group">
-                                        <input type="radio" name="occasion" value="other" class="peer sr-only">
+                                        <input type="radio" name="occasion" value="others" class="peer sr-only"
+                                        {{ old('occasion', $guestData->partyDetail->occasion) === 'others' ? 'checked' : '' }}>
                                         <div class="px-6 py-3.5 bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-xl flex items-center gap-3 transition-all peer-checked:bg-gradient-to-r peer-checked:from-[#C85A54] peer-checked:to-[#d67168] peer-checked:border-[#C85A54] peer-checked:shadow-lg peer-checked:shadow-[#C85A54]/30 hover:border-[#C85A54]/50">
                                             <span class="text-2xl">🎉</span>
                                             <span class="font-semibold text-gray-700 dark:text-gray-200 peer-checked:text-white group-has-[:checked]:text-white">Other</span>
@@ -255,11 +291,7 @@
 
                         </div>
                     </div>
-                </div>
-
-                <!-- RIGHT SIDE — THEME & FOOD PACKAGE -->
-                <div class="lg:col-span-1 space-y-8">
-                    
+                    <br>
                     <!-- PICK A PARTY THEME -->
                     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden sticky top-6">
                         <div class="bg-gradient-to-r from-purple-500 to-pink-500 py-6 px-6">
@@ -276,10 +308,10 @@
                             </p>
                             <div class="space-y-3">
                                 <label class="block cursor-pointer">
-                                    <input type="radio" name="theme" value="superheroes" class="peer sr-only">
+                                    <input type="radio" name="party_package" value="madagascar" class="peer sr-only"
+                                        {{ old('party_package', $guestData->partyDetail->party_package) == 'madagascar' ? 'checked' : '' }}>>
                                     <div class="p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl hover:border-purple-500 transition-all peer-checked:border-purple-500 peer-checked:bg-purple-50 dark:peer-checked:bg-purple-900/20">
                                         <div class="flex items-center gap-3">
-                                            <span class="text-3xl">🦸</span>
                                             <div>
                                                 <p class="font-semibold text-gray-900 dark:text-white">Madagascar </p>
                                             </div>
@@ -287,10 +319,10 @@
                                     </div>
                                 </label>
                                 <label class="block cursor-pointer">
-                                    <input type="radio" name="theme" value="princess" class="peer sr-only">
+                                    <input type="radio" name="party_package" value="happy" class="peer sr-only"
+                                        {{ old('party_package', $guestData->partyDetail->party_package) == 'happy' ? 'checked' : '' }}>>
                                     <div class="p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl hover:border-pink-500 transition-all peer-checked:border-pink-500 peer-checked:bg-pink-50 dark:peer-checked:bg-pink-900/20">
                                         <div class="flex items-center gap-3">
-                                            <span class="text-3xl">👑</span>
                                             <div>
                                                 <p class="font-semibold text-gray-900 dark:text-white">Happy</p>
                                             </div>
@@ -298,10 +330,10 @@
                                     </div>
                                 </label>
                                 <label class="block cursor-pointer">
-                                    <input type="radio" name="theme" value="space" class="peer sr-only">
+                                    <input type="radio" name="party_package" value="cocomelon" class="peer sr-only"
+                                        {{ old('party_package', $guestData->partyDetail->party_package) == 'cocomelon' ? 'checked' : '' }}>>
                                     <div class="p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl hover:border-blue-500 transition-all peer-checked:border-blue-500 peer-checked:bg-blue-50 dark:peer-checked:bg-blue-900/20">
                                         <div class="flex items-center gap-3">
-                                            <span class="text-3xl">🚀</span>
                                             <div>
                                                 <p class="font-semibold text-gray-900 dark:text-white">Cocomelon</p>
                                             </div>
@@ -309,10 +341,10 @@
                                     </div>
                                 </label>
                                 <label class="block cursor-pointer">
-                                    <input type="radio" name="theme" value="space" class="peer sr-only">
+                                    <input type="radio" name="party_package" value="my-little-pony" class="peer sr-only"
+                                    {{ old('party_package', $guestData->partyDetail->party_package) == 'my-little-pony' ? 'checked' : '' }}>>
                                     <div class="p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl hover:border-blue-500 transition-all peer-checked:border-blue-500 peer-checked:bg-blue-50 dark:peer-checked:bg-blue-900/20">
                                         <div class="flex items-center gap-3">
-                                            <span class="text-3xl">🚀</span>
                                             <div>
                                                 <p class="font-semibold text-gray-900 dark:text-white">My Little Pony</p>
                                             </div>
@@ -322,7 +354,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <!-- RIGHT SIDE — THEME & FOOD PACKAGE -->
+                <div class="lg:col-span-1 space-y-8">
                     <!-- FOOD PACKAGE PREVIEW -->
                     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
                         <div class="bg-gradient-to-r from-orange-500 to-red-500 py-6 px-6">
@@ -335,21 +370,35 @@
                         </div>
                         <div class="p-6">
                             <p class="text-sm text-gray-600 dark:text-gray-400 text-center mb-4">
-                                Scroll down to select food packages
+                                @foreach($guestData->foodPack as $index => $package)
+                                    <div class="bg-gradient-to-r from-blue-300 to-blue-400 rounded-lg p-6 mb-4 shadow-md">
+                                        <div class="flex flex-col md:flex md:flex-row items-center justify-between">
+                                            <div class="flex items-center gap-6">
+                                                <div>
+                                                    <h3 class="text-blue-600 font-bold text-sm mb-2">{{ $package->name }}</h3>
+                                                    <ul class="text-xs space-y-1">
+                                                        @foreach ($package->items ?? [] as $item)
+                                                            <li>• {{ $item }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                    <p class="text-red-600 font-bold text-2xl mt-3">₱{{ $package->price }}</p>
+                                                </div>
+                                            </div>
+
+                                            <input type="hidden" name="food_packages[{{ $index }}][name]" value="{{ $package->name }}">
+                                            <input type="hidden" name="food_packages[{{ $index }}][price]" value="{{ $package->price }}">
+
+                                            <div class="flex justify-center items-center gap-2">
+                                                <input type="number" name="food_packages[{{ $index }}][quantity]" min="0" value="{{ $package->quantity ?? 1 }}" class="w-32 text-center border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:outline-none">
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </p>
-                            <div class="flex items-center justify-center py-8">
-                                <div class="text-center">
-                                    <div class="text-6xl mb-4">🍔</div>
-                                    <p class="text-gray-500 dark:text-gray-400 text-sm">No items selected yet</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
             <!-- Action Buttons -->
             <div class="mt-8 flex justify-between items-center">
                 <a href="" 
@@ -363,7 +412,7 @@
                     </button>
                     <button type="submit" 
                         class="px-8 py-3 bg-gradient-to-r from-[#C85A54] to-[#d67168] text-white rounded-xl font-bold shadow-lg shadow-[#C85A54]/30 hover:shadow-xl hover:shadow-[#C85A54]/40 transition-all">
-                        Accept Reservation
+                        Accept Reservationasd
                     </button>
                 </div>
             </div>

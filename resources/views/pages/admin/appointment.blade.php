@@ -26,16 +26,16 @@
                 'date' => $payment->partyDetail->created_at->format('F j, Y'),
                 'customer' => $payment->customer,
                 'payable_amount' => '₱ ' . number_format($payment->partyDetail->grand_total, 2),
+                
             ];
         })"
-        @php
-            dd($pendingPayments);
-        @endphp
-        :actions="collect([
+
+        :actions="$pendingPayments->map(function($payment) {
+            return 
             [
-                ['label' => 'Edit', 'type' => 'edit', 'url' => ''],
-            ],
-        ])"
+                ['label' => 'Edit', 'type' => 'edit', 'url' => route('admin.reservation-edit', ['guestId' => $payment->partyDetail->guest_id])],
+            ];
+        })"
 
         empty-message="No sales records found"
     />

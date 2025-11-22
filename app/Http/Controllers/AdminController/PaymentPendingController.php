@@ -21,7 +21,7 @@ class PaymentPendingController extends Controller
     {
 
         $pendingPayments = $this->paymentPendingService->show();
-
+        //dd($pendingPayments);
         return view('pages.admin.appointment',compact(
             'pendingPayments'
         ));
@@ -30,10 +30,12 @@ class PaymentPendingController extends Controller
 
     public function edit($guestId)
     {
-        $guestData = $this->guestReservationAmendService->edit($guestId);
-
         try{
+            $guestData = $this->guestReservationAmendService->edit($guestId);
 
+            return view('pages.admin.partial.edit',compact(
+                'guestData'
+            ));
             
         }catch(HttpException $e){
             return redirect()->back()->with('error', $e->getMessage());

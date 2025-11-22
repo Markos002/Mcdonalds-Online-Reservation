@@ -18,28 +18,18 @@
             'Date', 
             'Occasions',
             'Payment Status',
+            'Status',
         ]"
 
-        :rows="collect([
-            [
-                'customer' => 'Jacob Marcus',
-                'date' => '23/09/2022',
-                'occasions' => 'birthdayparty',
-                'payment_status' => 'Waiting',
-            ],
-            [
-                'customer' => 'Jacob Marcus',
-                'date' => '23/09/2022',
-                'occasions' => 'birthdayparty',
-                'payment_status' => 'Waiting',
-            ],
-            [
-                'customer' => 'Jacob Marcus',
-                'date' => '23/09/2022',
-                'occasions' => 'birthdayparty',
-                'payment_status' => 'Waiting',
-            ],
-        ])"
+        :rows="$pendingParties->map(function($pendingParty) {
+            return [
+                'customer' => $pendingParty->customer,
+                'date' => $pendingParty->partyDetail->check_in_date,
+                'occasions' => $pendingParty->partyDetail->occasion,
+                'payment_status' => $pendingParty->partyDetail->payment_status,
+                'status' => $pendingParty->partyDetail->party_status,
+            ];
+        })"
 
         :actions="collect([
             [
