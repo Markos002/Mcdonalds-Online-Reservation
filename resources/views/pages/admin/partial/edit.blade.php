@@ -54,7 +54,7 @@
     @endphp
 
     <div class="py-8 px-6 max-w-[1600px] mx-auto">
-        <form method="POST" action="{{ route('admin.reservation.update', $guestData->id) }}" class="space-y-8">
+        <form method="POST" action="{{ route('admin.reservation.update', $guestData->guest_id) }}" class="space-y-8">
             @csrf
             @method('PUT')
 
@@ -87,6 +87,7 @@
                                 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div class="relative">
+                                        <input type="hidden" name="guest_id" value="{{ $guestData->guest_id }}">
                                         <label for="first_name" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-200">
                                             First Name <span class="text-red-500">*</span>
                                         </label>
