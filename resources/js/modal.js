@@ -66,7 +66,7 @@ function validateStep1() {
     return !!isValid;
 }
 
-function nextStep() {
+window.nextStep = function () {
     const occasion = document.querySelector('input[name="occasion"]:checked')?.value;
     if (currentStep === 1) {
         if (!validateStep1()) return;
@@ -84,7 +84,7 @@ function nextStep() {
     showStep(currentStep);
 }
 
-function prevStep() {
+window.prevStep = function (){
     if (currentStep > 1) {
         currentStep = (currentStep === 3 && skippedStep2) ? 1 : currentStep - 1;
         showStep(currentStep);

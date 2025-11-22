@@ -15,61 +15,46 @@
         $foodPackages = [
             [
                 'name' => 'Food Package 1',
-                'image' => 'images/package1.png',
                 'price' => 149,
                 'items' => ['1pc Chicken McDo with McDoSpaghetti','12oz Coke'],
-                'color' => 'from-blue-300 to-blue-400',
-                'textColor' => 'text-blue-600',
-                'category' => 'adults',
             ],
             [
                 'name' => 'Food Package 2',
-                'image' => 'images/package2.png',
                 'price' => 199,
                 'items' => ['1pc Chicken McDo with Rice','Medium Fries','Apple Pie','16oz Coke'],
-                'color' => 'from-blue-300 to-blue-400',
-                'textColor' => 'text-blue-600',
-                'category' => 'adults',
             ],
             [
                 'name' => 'Food Package 3',
-                'image' => 'images/package3.png',
                 'price' => 259,
                 'items' => ['1pc Chicken McDo with McDoSpaghetti', 'Medium Fries', '16oz Coke'],
-                'color' => 'from-blue-300 to-blue-400',
-                'textColor' => 'text-blue-600',
-                'category' => 'adults',
             ],
             [
                 'name' => 'Food Package 4',
-                'image' => 'images/package4.png',
                 'price' => 219,
                 'items' => ['4pc Chicken McNuggets with Rice', 'Regular Fries', '12oz Orange Juice', 'Sundae','Happy Meal Toy'],
-                'color' => 'from-pink-200 to-pink-300',
-                'textColor' => 'text-pink-600',
-                'category' => 'kids',
             ],
             [
                 'name' => 'Food Package 5',
-                'image' => 'images/package5.png',
                 'price' => 279,
                 'items' => ['1pc Chicken McDo with McDoSpaghetti', 'Regular Fries', '12oz Orange Juice', 'Sundae','Happy Meal Toy'],
-                'color' => 'from-pink-200 to-pink-300',
-                'textColor' => 'text-pink-600',
-                'category' => 'kids',
             ]
         ];
-
-            $addonsOptions = [
-                ['label' => '₱59 php - Regular Fries', 'value' => 'fries', 'price' => 59],
-                ['label' => '₱150 php - Big Mac', 'value' => 'bigmac', 'price' => 150],
-                ['label' => '₱52 php - Coke Float', 'value' => 'cokefloat', 'price' => 52],
-            ];
-
-            $addonRows = 3; 
+        $addonsOptions = [
+            [
+                'name' => 'Fries', 'price' => 59
+            ],
+            [
+                'name' => 'Bigmac', 'price' => 150
+            ], 
+            [
+                'name' => 'Cokefloat', 'price' => 52
+            ], 
+        ];
+        $existingPackages = $guestData->foodPack->keyBy('name');
     @endphp
+
     <div class="py-8 px-6 max-w-[1600px] mx-auto">
-        <form method="POST" action="">
+        <form method="POST" action="{{ route('admin.reservation.update', $guestData->id) }}" class="space-y-8">
             @csrf
             @method('PUT')
 
@@ -355,7 +340,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- RIGHT SIDE — THEME & FOOD PACKAGE -->
                 <div class="lg:col-span-1 space-y-8">
                     <!-- FOOD PACKAGE PREVIEW -->
@@ -370,31 +354,80 @@
                         </div>
                         <div class="p-6">
                             <p class="text-sm text-gray-600 dark:text-gray-400 text-center mb-4">
-                                @foreach($guestData->foodPack as $index => $package)
-                                    <div class="bg-gradient-to-r from-blue-300 to-blue-400 rounded-lg p-6 mb-4 shadow-md">
-                                        <div class="flex flex-col md:flex md:flex-row items-center justify-between">
-                                            <div class="flex items-center gap-6">
+                                @foreach($foodPackages as $index => $package)
+                                    @php
+                                        $dbPackage = $existingPackages->get($package['name']);
+                                        $quantity = $dbPackage ? $dbPackage->quantity : 0;
+                                    @endphp
+                                    <div class="bg-gradient-to-r rounded-lg shadow-md p-6">
+                                        <div class="flex flex-col md:flex-row justify-between items-center gap-6 bg-white p-3 rounded-lg">
+                                            <!-- Package Details -->
+                                            <div class="flex gap-5 items-center ">
                                                 <div>
-                                                    <h3 class="text-blue-600 font-bold text-sm mb-2">{{ $package->name }}</h3>
-                                                    <ul class="text-xs space-y-1">
-                                                        @foreach ($package->items ?? [] as $item)
+                                                    <h3 class="font-bold  text-sm">
+                                                        {{ $package['name'] }}
+                                                    </h3>
+                                                    <ul class="text-xs mt-2 space-y-1">
+                                                        @foreach($package['items'] as $item)
                                                             <li>• {{ $item }}</li>
                                                         @endforeach
                                                     </ul>
-                                                    <p class="text-red-600 font-bold text-2xl mt-3">₱{{ $package->price }}</p>
+                                                    <p class="text-red-600 font-bold text-lg mt-2">
+                                                        ₱{{ number_format($package['price']) }}
+                                                    </p>
                                                 </div>
                                             </div>
 
-                                            <input type="hidden" name="food_packages[{{ $index }}][name]" value="{{ $package->name }}">
-                                            <input type="hidden" name="food_packages[{{ $index }}][price]" value="{{ $package->price }}">
+                                            <!-- Hidden Inputs -->
+                                            <input type="hidden" name="food_packages[{{ $index }}][name]" value="{{ $package['name'] }}">
+                                            <input type="hidden" name="food_packages[{{ $index }}][price]" value="{{ $package['price'] }}">
 
-                                            <div class="flex justify-center items-center gap-2">
-                                                <input type="number" name="food_packages[{{ $index }}][quantity]" min="0" value="{{ $package->quantity ?? 1 }}" class="w-32 text-center border border-gray-300 rounded-md focus:ring-2 focus:ring-[#C85A54] focus:outline-none">
+                                            <!-- Quantity Controls -->
+                                            <div class="flex gap-2 items-center">
+                                                <input type="number" min="0"
+                                                    name="food_packages[{{ $index }}][quantity]"
+                                                    value="{{ $quantity }}"
+                                                    class="w-16 text-center border rounded-md py-1">
                                             </div>
                                         </div>
                                     </div>
+
                                 @endforeach
                             </p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+                        <div class="bg-gradient-to-r from-teal-500 to-cyan-500 py-6 px-6">
+                            <h2 class="text-white text-xl font-bold text-center flex items-center justify-center gap-2">
+                                ➕ Add-Ons
+                            </h2>
+                        </div>
+
+                        <div class="p-6 space-y-4">
+
+                        @foreach($addonsOptions as $index => $addon)
+
+                            @php
+                                $dbAddon = $existingPackages->get($addon['name']);
+                                $quantity = $dbAddon ? $dbAddon->quantity : 0;
+                            @endphp
+
+                            <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow">
+
+                                <div>
+                                    <h3>{{ $addon['name'] }}</h3>
+                                    <p>₱{{ number_format($addon['price']) }}</p>
+                                </div>
+                                <input type="hidden" name="addons[{{ $index }}][name]" value="{{ $addon['name'] }}">
+                                <input type="hidden" name="addons[{{ $index }}][price]" value="{{ $addon['price'] }}">
+                                <input type="number"
+                                    name="addons[{{ $index }}][quantity]"
+                                    value="{{ $quantity }}"
+                                    min="0"
+                                    class="w-16 text-center border rounded">
+                            </div>
+
+                        @endforeach
                         </div>
                     </div>
                 </div>
