@@ -34,6 +34,8 @@
             return 
             [
                 ['label' => 'Edit', 'type' => 'edit', 'url' => route('admin.reservation-edit', ['guestId' => $payment->partyDetail->guest_id])],
+                ['label' => 'Accept', 'type' => 'done', 'url' => '#','confirm' => 'accept'],
+                ['label' => 'Cancel', 'type' => 'cancel', 'url' => '#','confirm' => 'cancel'],
             ];
         })"
 

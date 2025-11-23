@@ -61,29 +61,11 @@
 
                         <td class="px-4 py-3 text-xs sm:text-sm whitespace-nowrap">
 
-                            {{-- Hash Links --}}
+                            {{-- Hash links --}}
                             @if(Str::startsWith($cell, '#'))
                                 <span class="text-blue-600 font-medium hover:underline cursor-pointer">
                                     {{ $cell }}
                                 </span>
-
-                            {{-- Add button --}}
-                            @elseif(strtolower($cell) === 'add')
-                                <button class="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-4 py-1.5 rounded-md transition">
-                                    Add
-                                </button>
-
-                            {{-- Edit button --}}
-                            @elseif(strtolower($cell) === 'edit')
-                                <button class="bg-red-100 text-red-600 hover:bg-red-200 px-4 py-1.5 text-xs font-semibold rounded-md transition">
-                                    Edit
-                                </button>
-
-                            {{-- Done button --}}
-                            @elseif(strtolower($cell) === 'done')
-                                <button class="bg-green-100 text-green-600 hover:bg-green-200 px-4 py-1.5 text-xs font-semibold rounded-md transition">
-                                    Done
-                                </button>
 
                             {{-- Status Badges --}}
                             @elseif($key === 'payment_status' || $key === 'status')
@@ -99,7 +81,7 @@
                         </td>
                     @endforeach
 
-                    {{-- Optional Dynamic Actions --}}
+                    {{-- Action Buttons --}}
                     @if (!empty($actions))
                         <td class="px-4 py-3 whitespace-nowrap">
                             <div class="flex flex-wrap gap-2">
@@ -108,20 +90,27 @@
                                         $type = $action['type'] ?? 'default';
 
                                         $colorClasses = match($type) {
-                                            'edit' => 'bg-red-100 text-red-600 hover:bg-red-200',
+                                            'edit' => 'bg-blue-100 text-blue-600 hover:bg-red-200',
                                             'done' => 'bg-green-100 text-green-600 hover:bg-green-200',
+                                            'cancel' => 'bg-red-100 text-red-600 hover:bg-red-200',
                                             'add' => 'bg-red-600 text-white hover:bg-red-700',
                                             default => 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                                         };
                                     @endphp
 
-                                    <a href="{{ $action['url'] ?? '#' }}"
-                                       @if($action['confirm'] ?? false)
-                                           onclick="return confirm('{{ $action['confirm'] }}')"
-                                       @endif
-                                       class="px-4 py-1.5 text-xs font-semibold rounded-md transition {{ $colorClasses }}">
-                                        {{ $action['label'] ?? ucfirst($type) }}
-                                    </a>
+                                    @if(in_array($type, ['done', 'cancel']))
+                                        <button
+                                            type="button"
+                                            onclick="openConfirmModal('{{ $type }}', '{{ $action['url'] }}')"
+                                            class="px-4 py-1.5 text-xs font-semibold rounded-md transition {{ $colorClasses }}">
+                                            {{ $action['label'] }}
+                                        </button>
+                                    @else
+                                        <a href="{{ $action['url'] }}"
+                                        class="px-4 py-1.5 text-xs font-semibold rounded-md transition {{ $colorClasses }}">
+                                            {{ $action['label'] }}
+                                        </a>
+                                    @endif
                                 @endforeach
                             </div>
                         </td>
@@ -130,7 +119,7 @@
 
             @empty
                 <tr>
-                    <td colspan="{{ count($headers) + (!empty($actions) ? 2 : 1) }}"
+                    <td colspan="{{ count($headers) + 1 }}"
                         class="px-4 py-12 text-center text-gray-500 text-sm">
 
                         <div class="flex flex-col items-center gap-2">
@@ -149,3 +138,54 @@
         </tbody>
     </table>
 </div>
+<!-- MODAL -->
+<div id="confirmModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-40">
+    <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
+        <h2 class="text-lg font-semibold mb-3">Confirm Action</h2>
+
+        <p id="confirmMessage" class="text-gray-600 mb-6 text-sm"></p>
+
+        <div class="flex justify-end gap-2">
+            <button onclick="closeConfirmModal()"
+                    class="px-4 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300">
+                No
+            </button>
+
+            <a id="confirmButton"
+                class="px-5 py-2 text-sm rounded transition cursor-pointer">
+                Yes
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<script>
+function openConfirmModal(actionType, url) {
+
+    const modal = document.getElementById('confirmModal');
+    const message = document.getElementById('confirmMessage');
+    const confirmBtn = document.getElementById('confirmButton');
+
+    if (actionType === 'done') {
+        message.innerText = "Are you sure you want to ACCEPT this reservation?";
+        confirmBtn.className = "px-5 py-2 text-sm rounded bg-green-600 text-white hover:bg-green-700 transition";
+    } 
+    else if (actionType === 'cancel') {
+        message.innerText = "Are you sure you want to CANCEL this reservation?";
+        confirmBtn.className = "px-5 py-2 text-sm rounded bg-red-600 text-white hover:bg-red-700 transition";
+    }
+
+    confirmBtn.href = url;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function closeConfirmModal() {
+    const modal = document.getElementById('confirmModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+</script>
+

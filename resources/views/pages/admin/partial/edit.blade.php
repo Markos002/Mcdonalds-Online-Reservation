@@ -435,18 +435,14 @@
             </div>
             <!-- Action Buttons -->
             <div class="mt-8 flex justify-between items-center">
-                <a href="" 
+                <a href="{{ route('admin.appointments') }}" 
                     class="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-xl font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all">
                     Back
                 </a>
                 <div class="flex gap-4">
-                    <button type="button" 
-                        class="px-6 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-600 transition-all">
-                        Cancel Reservation
-                    </button>
                     <button type="submit" 
                         class="px-8 py-3 bg-gradient-to-r from-[#C85A54] to-[#d67168] text-white rounded-xl font-bold shadow-lg shadow-[#C85A54]/30 hover:shadow-xl hover:shadow-[#C85A54]/40 transition-all">
-                        Accept Reservationasd
+                        Submit
                     </button>
                 </div>
             </div>
