@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController\ReservationHistoryController;
 use App\Http\Controllers\GuestController\ReservationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GuestController\GuestDashboardController;
+use App\Http\Controllers\GuestController\MyHistoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,7 +37,6 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
 
     Route::get('/reservation-history',[ReservationHistoryController::class, 'index'])->name('admin.reservation-history');
 
-    // handle accept and cancel
     Route::post('/request/{id}/{action}',[PaymentPendingController::class, 'update'])->name('admin.request.handle');
    
 
@@ -48,7 +48,10 @@ Route::prefix('guest')->middleware(['auth', 'role:guest'])->group(function(){
 
     Route::post('/date/request', [ReservationController::class, 'post'])->name('guest.date.request');
 
+    Route::get('/my-history',[MyHistoryController::class, 'index'])->name('guest.my-history');
+
     Route::get('/reservations', [ReservationController::class, 'index'])->name('guest.reservations');
+    
     Route::post('/reservations/store', [ReservationController::class, 'store'])->name('guest.reservations.store');
  
     Route::get('/confirmation',function(){

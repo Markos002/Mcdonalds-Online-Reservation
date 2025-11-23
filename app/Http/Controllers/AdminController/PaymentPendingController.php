@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\IGuestReservationAmendService;
 use App\Services\Contracts\IPaymentPendingService;
+use Exception;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -48,6 +49,14 @@ class PaymentPendingController extends Controller
 
     public function update($id, $action)
     {
-        dd($id,$action);
+        try{
+
+            $message = $this->paymentPendingService->update($id, $action);
+            return Redirect()->back()->with('success', $message);
+
+        }catch(Exception $e)
+        {
+            return Redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

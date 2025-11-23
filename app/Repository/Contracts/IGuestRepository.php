@@ -16,4 +16,6 @@ interface IGuestRepository
 
     public function findGuestReservationForEdit($guestId);
 
+    public function getMyReservationHistory($id);
+
 }

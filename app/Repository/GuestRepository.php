@@ -28,7 +28,7 @@ class GuestRepository implements IGuestRepository
         }
         
         $find->update($data);
-        return $find; // ✅ This returns the Guest model
+        return $find; 
     }
 
     public function delete($id)
@@ -124,5 +124,26 @@ class GuestRepository implements IGuestRepository
         ])
         ->where('guest_id', $guestId)
         ->first();
+    }
+
+    public function getMyReservationHistory($id)
+    {
+       return Guest::with(['partyDetail' => function($query){
+               $query->select(
+                    'guest_id',
+                    'check_in_date',
+                    DB::raw("CONCAT(check_in_time, ' - ', check_out_time)AS check_period"),
+                    'time_extend AS extended_time',
+                    'occasion',
+                    'party_package',
+                    'party_status',
+                    'payment_status',
+                    'reservation_id',
+                    'grand_total'
+               );
+       }])
+               ->select('guest_id')
+               ->where('user_id', $id)
+               ->paginate(7);
     }
 }

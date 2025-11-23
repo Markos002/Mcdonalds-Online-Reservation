@@ -6,4 +6,6 @@ interface IRecordRegistryService
 {
 
     public function reservationHitory();
+
+    public function myReservationHistory();
 }

@@ -20,6 +20,12 @@ class PartyDetailRepository implements IPartyDetailRepository
         return PartyDetail::findOrFail($id);
     }
 
+    public function findByGuestId($id)
+    {
+        return PartyDetail::where('guest_id', $id)
+                ->where('payment_status', 'unpaid')
+                ->firstOrFail();
+    }
     public function update(int $id, array $data)
     {
         $find = $this->find($id);
@@ -109,4 +115,5 @@ class PartyDetailRepository implements IPartyDetailRepository
                 ->paginate(7);
     }
     
+
 }
