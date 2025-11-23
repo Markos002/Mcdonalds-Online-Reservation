@@ -32,7 +32,6 @@ class ReservationFormRequest extends FormRequest
             'email'      => ['required', 'string', 'email', 'max:50'],
             'check_in_date' => ['required', 'string', 'max:50'],
             'check_in_time' => ['required', 'string', 'max:50'],
-            //'check_out_time'=> ['required', 'string', 'max:50'],
             'adults'   => ['nullable', 'numeric', 'regex:/^\d+$/'],
             'kids'     => ['nullable', 'numeric', 'regex:/^\d+$/'],
             'occasion' => ['required', 'string', 'max:50'],

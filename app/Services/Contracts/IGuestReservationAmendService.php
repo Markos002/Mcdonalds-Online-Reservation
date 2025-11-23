@@ -6,4 +6,6 @@ interface IGuestReservationAmendService
 {
 
     public function edit($guestId);
+
+    public function update($data);
 }

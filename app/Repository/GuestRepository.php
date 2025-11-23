@@ -22,7 +22,13 @@ class GuestRepository implements IGuestRepository
     public function update(int $id, array $data)
     {
         $find = $this->find($id);
-        return $find->update($data);
+        
+        if (!$find) {
+            return false;
+        }
+        
+        $find->update($data);
+        return $find; // ✅ This returns the Guest model
     }
 
     public function delete($id)
