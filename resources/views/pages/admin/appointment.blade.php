@@ -30,13 +30,24 @@
             ];
         })"
 
-        :actions="$pendingPayments->map(function($payment) {
-            return 
-            [
-                ['label' => 'Edit', 'type' => 'edit', 'url' => route('admin.reservation-edit', ['guestId' => $payment->partyDetail->guest_id])],
-                ['label' => 'Accept', 'type' => 'done', 'url' => '#','confirm' => 'accept'],
-                ['label' => 'Cancel', 'type' => 'cancel', 'url' => '#','confirm' => 'cancel'],
-            ];
+        :actions="$pendingPayments->map(function($payment) { 
+            return [
+                        [
+                            'label' => 'Edit', 
+                            'type' => 'edit', 
+                            'url' => route('admin.reservation-edit', ['guestId' => $payment->partyDetail->guest_id])
+                        ],
+                        [
+                            'label' => 'Accept', 
+                            'type' => 'done', 
+                            'url' => route('admin.request.handle', ['id' => $payment->partyDetail->guest_id, 'action' => 'accept'])
+                        ],
+                        [
+                            'label' => 'Cancel', 
+                            'type' => 'cancel',
+                            'url' => route('admin.request.handle', ['id' => $payment->partyDetail->guest_id, 'action' => 'cancel'])
+                        ],
+                    ];
         })"
 
         empty-message="No sales records found"

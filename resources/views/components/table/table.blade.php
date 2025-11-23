@@ -90,7 +90,7 @@
                                         $type = $action['type'] ?? 'default';
 
                                         $colorClasses = match($type) {
-                                            'edit' => 'bg-blue-100 text-blue-600 hover:bg-red-200',
+                                            'edit' => 'bg-blue-100 text-blue-600 hover:bg-blue-200',
                                             'done' => 'bg-green-100 text-green-600 hover:bg-green-200',
                                             'cancel' => 'bg-red-100 text-red-600 hover:bg-red-200',
                                             'add' => 'bg-red-600 text-white hover:bg-red-700',
@@ -107,7 +107,7 @@
                                         </button>
                                     @else
                                         <a href="{{ $action['url'] }}"
-                                        class="px-4 py-1.5 text-xs font-semibold rounded-md transition {{ $colorClasses }}">
+                                           class="inline-block px-4 py-1.5 text-xs font-semibold rounded-md transition {{ $colorClasses }}">
                                             {{ $action['label'] }}
                                         </a>
                                     @endif
@@ -144,21 +144,23 @@
         <h2 class="text-lg font-semibold mb-3">Confirm Action</h2>
 
         <p id="confirmMessage" class="text-gray-600 mb-6 text-sm"></p>
+        
+        <form id="confirmForm" method="POST" action="">
+            @csrf
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="closeConfirmModal()"
+                        class="px-4 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300">
+                    No
+                </button>
 
-        <div class="flex justify-end gap-2">
-            <button onclick="closeConfirmModal()"
-                    class="px-4 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300">
-                No
-            </button>
-
-            <a id="confirmButton"
-                class="px-5 py-2 text-sm rounded transition cursor-pointer">
-                Yes
-            </a>
-        </div>
+                <button type="submit" id="confirmButton"
+                        class="px-5 py-2 text-sm rounded transition cursor-pointer">
+                    Yes
+                </button>
+            </div>
+        </form>
     </div>
 </div>
-
 
 <script>
 function openConfirmModal(actionType, url) {
@@ -166,6 +168,10 @@ function openConfirmModal(actionType, url) {
     const modal = document.getElementById('confirmModal');
     const message = document.getElementById('confirmMessage');
     const confirmBtn = document.getElementById('confirmButton');
+    const form = document.getElementById('confirmForm');
+
+    // Set form action
+    form.action = url;
 
     if (actionType === 'done') {
         message.innerText = "Are you sure you want to ACCEPT this reservation?";
@@ -176,8 +182,6 @@ function openConfirmModal(actionType, url) {
         confirmBtn.className = "px-5 py-2 text-sm rounded bg-red-600 text-white hover:bg-red-700 transition";
     }
 
-    confirmBtn.href = url;
-
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 }
@@ -187,5 +191,11 @@ function closeConfirmModal() {
     modal.classList.add('hidden');
     modal.classList.remove('flex');
 }
-</script>
 
+// Close modal on outside click
+document.getElementById('confirmModal')?.addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeConfirmModal();
+    }
+});
+</script>
