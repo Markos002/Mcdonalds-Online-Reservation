@@ -36,7 +36,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
 
     Route::get('/reservation-history',[ReservationHistoryController::class, 'index'])->name('admin.reservation-history');
 
-    // handle reject and cancel
+    // handle accept and cancel
     Route::post('/request/{id}/{action}',[PaymentPendingController::class, 'update'])->name('admin.request.handle');
    
 
