@@ -435,7 +435,7 @@
             </div>
             <!-- Action Buttons -->
             <div class="mt-8 flex justify-between items-center">
-                <a href="{{ route('admin.appointments') }}" 
+                <a href="{{ route('admin.appointment') }}" 
                     class="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-xl font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all">
                     Back
                 </a>
