@@ -19,6 +19,17 @@ class GuestRepository implements IGuestRepository
         return Guest::findOrFail($id);
     }
 
+    public function findByGuestId($guest_id)
+    {
+        return Guest::where('guest_id', $guest_id)
+                ->firstOrFail();
+    }
+
+    public function findByExist()
+    {
+        
+    }
+
     public function update(int $id, array $data)
     {
         $find = $this->find($id);
@@ -145,5 +156,45 @@ class GuestRepository implements IGuestRepository
                ->select('guest_id')
                ->where('user_id', $id)
                ->paginate(7);
+    }
+
+    public function getMyReservationDetails($guest_id)
+    {
+        return Guest::with([
+            'partyDetail' => function($query){
+                $query->select(
+                    'guest_id',
+                    'check_in_date',
+                    'check_in_time',
+                    'check_out_time',
+                    'time_extend',
+                    'adults',
+                    'kids',
+                    'occasion',
+                    'party_package',
+                    'party_status',
+                    'payment_status',
+                    'reservation_id',
+                    'grand_total'
+                );
+        },  'foodPack' => function($query){
+                $query->select(
+                    'guest_id',
+                    'name',
+                    'price',
+                    'quantity',
+                    'total'
+                );
+                $query->groupBy();
+        }])
+                ->select(
+                    'guest_id',
+                    DB::raw("CONCAT(last_name,', ', first_name)AS customer_name"),
+                    DB::raw("CONCAT(address,', ', city)AS full_add"),
+                    'zip_code',
+                    'phone'
+                )
+                ->where('guest_id', $guest_id)
+                ->get();
     }
 }

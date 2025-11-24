@@ -20,4 +20,10 @@ class ReservationHistoryController extends Controller
             'reservationHistory'
         ));
     }
+
+    public function show($guest_id)
+    {
+        $reservationDetail = $this->recordRegistryService->myReservationDetails($guest_id);
+        
+    }
 }

@@ -18,6 +18,13 @@ class UserRepository implements IUserRepository
         return User::findOrFail($id);
     }
 
+    public function isAdmin($id)
+    {
+         return User::where('id', $id)
+                ->where('role', 'admin')
+                ->exists();
+    }
+
     public function update(int $id, array $data)
     {
         $user = $this->find($id);

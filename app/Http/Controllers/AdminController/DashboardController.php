@@ -7,7 +7,9 @@ use App\Services\Contracts\IDashboardService;
 use Illuminate\Http\Request;
 use App\Dto\ResponseDto;
 use App\Models\PartyDetail;
+use App\Models\Guest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class DashboardController extends Controller
@@ -28,7 +30,7 @@ class DashboardController extends Controller
                     ->get()
                     ->map(fn($resDto) => new responseDto($resDto));
       //  dd($data);
-       
+
         $reservationOverview = $this->dashboardService->reservationStatusOverview();
         $salesIncome         = $this->dashboardService->salesIncomeByYear($year);
         $reservationTrends   = $this->dashboardService->monthlyReservationTrends($year);

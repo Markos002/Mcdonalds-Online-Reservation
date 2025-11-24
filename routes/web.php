@@ -38,6 +38,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
     Route::get('/reservation-history',[ReservationHistoryController::class, 'index'])->name('admin.reservation-history');
 
     Route::post('/request/{id}/{action}',[PaymentPendingController::class, 'update'])->name('admin.request.handle');
+    // NEW
+    Route::get('/reservation/details/{guest_id}',[ReservationHistoryController::class, 'show'])->name('admin.reservation-details');
    
 
 });
@@ -53,6 +55,8 @@ Route::prefix('guest')->middleware(['auth', 'role:guest'])->group(function(){
     Route::get('/reservations', [ReservationController::class, 'index'])->name('guest.reservations');
     
     Route::post('/reservations/store', [ReservationController::class, 'store'])->name('guest.reservations.store');
+    // NEW
+    Route::get('/reservation/details/{guest_id}',[ReservationHistoryController::class, 'show'])->name('admin.reservation-details');
  
     Route::get('/confirmation',function(){
         return view('pages.confirmation');

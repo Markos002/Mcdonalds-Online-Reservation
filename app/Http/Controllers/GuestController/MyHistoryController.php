@@ -17,4 +17,10 @@ class MyHistoryController extends Controller
         $myHistory = $this->recordRegistryService->myReservationHistory();
 
     }
+
+    public function show($guest_id)
+    {
+        $reservationDetail = $this->recordRegistryService->myReservationDetails($guest_id);
+             
+    }
 }
