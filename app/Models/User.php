@@ -25,12 +25,20 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'role'
     ];
 
     public function guest()
     {
         return $this->hasMany(Guest::class,'user_id');
     }
+
+    public function isAdmin():bool
+    {
+        return $this->role === 'admin';
+    }
+
+    
 
     /**
      * The attributes that should be hidden for serialization.

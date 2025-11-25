@@ -10,4 +10,6 @@ interface IRecordRegistryService
     public function myReservationHistory();
 
     public function myReservationDetails($guest_id);
+
+    public function timeExtend($data);
 }

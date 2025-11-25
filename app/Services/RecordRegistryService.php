@@ -7,6 +7,9 @@ use App\Repository\Contracts\IPartyDetailRepository;
 use App\Repository\Contracts\IUserRepository;
 use App\Services\Contracts\IRecordRegistryService;
 use App\Traits\GetAuthId;
+use Exception;
+use Illuminate\Support\Facades\Auth;
+
 
 class RecordRegistryService implements  IRecordRegistryService
 {
@@ -31,7 +34,9 @@ class RecordRegistryService implements  IRecordRegistryService
 
     public function myReservationDetails($guest_id)
     {
-        $isAdmin = $this->userRepository->isAdmin($this->getAuthId());
+       // $isAdmin = $this->userRepository->isAdmin($this->getAuthId());
+       
+       $isAdmin = Auth::user()->role === 'admin';
         
         $guest = $this->guestRepository->findByGuestId($guest_id);
         
@@ -48,5 +53,18 @@ class RecordRegistryService implements  IRecordRegistryService
         }
         
         return $data;
+    }
+
+    public function timeExtend($data)
+    {
+       $user = $this->partyDetailRepository->find($data['party_dtl_id']);
+
+        if($data['extension_note'] > 1){
+            throw new Exception('Extension cannot be more than 1 hour(s).');
+        }
+
+        $user->update([
+            'time_extend' => $data['extension_note']
+        ]);
     }
 }

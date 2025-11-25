@@ -87,6 +87,7 @@ class GuestRepository implements IGuestRepository
             ->with(['partyDetail' => function ($query) use ($paymentStatus, $partyStatus) {
                 $query->select(
                     'guest_id',
+                    'party_dtl_id',
                     'reservation_id',
                     'occasion',
                     'created_at',

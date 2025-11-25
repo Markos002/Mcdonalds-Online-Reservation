@@ -41,7 +41,7 @@
                         [
                             'label' => 'Extend', 
                             'type' => 'extend', 
-                            'url' => "#"
+                            'url' => route('admin.extend-time', ['party_dtl_id' => $view->partyDetail->party_dtl_id])
                         ],
                     ];
         })"
