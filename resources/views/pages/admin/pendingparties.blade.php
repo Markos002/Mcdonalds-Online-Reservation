@@ -38,6 +38,11 @@
                             'type' => 'view', 
                             'url' => route('admin.reservation-details', ['guest_id' => $view->partyDetail->guest_id])
                         ],
+                        [
+                            'label' => 'Extend', 
+                            'type' => 'extend', 
+                            'url' => "#"
+                        ],
                     ];
         })"
 

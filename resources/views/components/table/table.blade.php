@@ -94,11 +94,13 @@
                                             'done' => 'bg-green-100 text-green-600 hover:bg-green-200',
                                             'cancel' => 'bg-red-100 text-red-600 hover:bg-red-200',
                                             'add' => 'bg-red-600 text-white hover:bg-red-700',
+                                            'view' => 'bg-blue-100 text-blue-600 hover:bg-blue-200',
+                                            'extend' => 'bg-yellow-100 text-yellow-600 hover:bg-yellow-200',
                                             default => 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                                         };
                                     @endphp
 
-                                    @if(in_array($type, ['done', 'cancel']))
+                                    @if(in_array($type, ['done', 'cancel','extend']))
                                         <button
                                             type="button"
                                             onclick="openConfirmModal('{{ $type }}', '{{ $action['url'] }}')"
@@ -141,21 +143,28 @@
 <!-- MODAL -->
 <div id="confirmModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-40">
     <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
-        <h2 class="text-lg font-semibold mb-3">Confirm Action</h2>
 
-        <p id="confirmMessage" class="text-gray-600 mb-6 text-sm"></p>
-        
+        <h2 class="text-lg font-semibold mb-3" id="modalTitle">Confirm Action</h2>
+        <p id="confirmMessage" class="text-gray-600 mb-4 text-sm"></p>
         <form id="confirmForm" method="POST" action="">
             @csrf
+            <div id="extendInput" class="hidden mb-4">
+                <label class="text-sm font-medium text-gray-700 block mb-1">
+                    Add Time Extension
+                </label>
+                <input type="number" 
+                       name="extension_note"
+                       class="w-full px-3 py-2 border rounded-md text-sm focus:ring focus:ring-yellow-200"
+                       placeholder="Enter extension time in hours... ex: 1">
+            </div>
             <div class="flex justify-end gap-2">
                 <button type="button" onclick="closeConfirmModal()"
                         class="px-4 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300">
-                    No
+                    Cancel
                 </button>
-
                 <button type="submit" id="confirmButton"
                         class="px-5 py-2 text-sm rounded transition cursor-pointer">
-                    Yes
+                    Confirm
                 </button>
             </div>
         </form>
@@ -169,17 +178,28 @@ function openConfirmModal(actionType, url) {
     const message = document.getElementById('confirmMessage');
     const confirmBtn = document.getElementById('confirmButton');
     const form = document.getElementById('confirmForm');
+    const extendInput = document.getElementById('extendInput');
+    const modalTitle = document.getElementById('modalTitle');
 
-    // Set form action
     form.action = url;
+    // Reset everything
+    extendInput.classList.add('hidden');
+    message.innerText = "";
 
     if (actionType === 'done') {
+        modalTitle.innerText = "Accept Reservation";
         message.innerText = "Are you sure you want to ACCEPT this reservation?";
         confirmBtn.className = "px-5 py-2 text-sm rounded bg-green-600 text-white hover:bg-green-700 transition";
     } 
     else if (actionType === 'cancel') {
+        modalTitle.innerText = "Cancel Reservation";
         message.innerText = "Are you sure you want to CANCEL this reservation?";
         confirmBtn.className = "px-5 py-2 text-sm rounded bg-red-600 text-white hover:bg-red-700 transition";
+    }
+    else if (actionType === 'extend') {
+        modalTitle.innerText = "Extend Reservation";
+        extendInput.classList.remove('hidden');
+        confirmBtn.className = "px-5 py-2 text-sm rounded bg-yellow-600 text-white hover:bg-yellow-700 transition";
     }
 
     modal.classList.remove('hidden');
@@ -192,10 +212,11 @@ function closeConfirmModal() {
     modal.classList.remove('flex');
 }
 
-// Close modal on outside click
+// Close when clicking outside
 document.getElementById('confirmModal')?.addEventListener('click', function(e) {
     if (e.target === this) {
         closeConfirmModal();
     }
 });
+
 </script>
