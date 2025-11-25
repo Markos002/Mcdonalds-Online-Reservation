@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('HISTORY') }}
+            {{ __('PAYMENT PENDING') }}
         </h2>
     </x-slot>
 
@@ -13,40 +13,36 @@
         </div>
 
         <x-table.table 
-        :headers="[ 
-            'Customer',
-            'Date',
-            'Time',
-            'Occasions', 
-            'Status',
-            'Payment Status'
+        :headers="[
+            'ID', 
+            'Date', 
+            'Check in Period',
+            'Extension',
+            'Payable Amount',  
         ]"
 
-        :rows="$reservationHistory->map(function($history) {
+        :rows="$myHistory->map(function($payment) {
             return [
-                'customer' => $history->reservation_id,
-                'date' => $history->check_in_date,
-                'time' => $history->check_period,
-                'ocassions' => $history->occasion,
-                'status' => $history->party_status,
-                'payment_status' => $history->payment_status,
+                'id' => $payment->partyDetail->reservation_id,
+                'date' => $payment->partyDetail->check_in_date,
+                'check_in_period' => $payment->partyDetail->check_period,
+                'extend' => $payment->partyDetail->extended_time,
+                'payable_amount' => '₱ ' . number_format($payment->partyDetail->grand_total, 2),
                 
             ];
         })"
 
-        :actions="$reservationHistory->map(function($history) { 
+        :actions="$myHistory->map(function($history) { 
             return [
                         [
                             'label' => 'View', 
                             'type' => 'view', 
-                            'url' => route('admin.reservation-details', ['guest_id' => $history->party_dtl_id])
+                            'url' => route('guest.reservation-details', ['guest_id' => $history->partyDetail->guest_id])
                         ],
                     ];
         })"
-        
-
+      
         empty-message="No sales records found"
     />
-
 
 </x-app-layout>

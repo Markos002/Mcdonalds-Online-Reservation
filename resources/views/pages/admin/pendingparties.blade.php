@@ -31,17 +31,15 @@
             ];
         })"
 
-        :actions="collect([
-            [
-                ['label' => 'View', 'type' => 'view', 'url' => '#'],
-            ],
-            [
-                ['label' => 'View', 'type' => 'view', 'url' => '#'],
-            ],
-            [
-                ['label' => 'View', 'type' => 'view', 'url' => '#'],
-            ],
-        ])"
+        :actions="$pendingParties->map(function($view) { 
+            return [
+                        [
+                            'label' => 'View', 
+                            'type' => 'view', 
+                            'url' => route('admin.reservation-details', ['guest_id' => $view->partyDetail->guest_id])
+                        ],
+                    ];
+        })"
 
         empty-message="No pending parties as of now"
     />

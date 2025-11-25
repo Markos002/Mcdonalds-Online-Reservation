@@ -56,7 +56,7 @@ Route::prefix('guest')->middleware(['auth', 'role:guest'])->group(function(){
     
     Route::post('/reservations/store', [ReservationController::class, 'store'])->name('guest.reservations.store');
     // NEW
-    Route::get('/reservation/details/{guest_id}',[ReservationHistoryController::class, 'show'])->name('admin.reservation-details');
+    Route::get('/reservation/details/{guest_id}',[ReservationHistoryController::class, 'show'])->name('guest.reservation-details');
  
     Route::get('/confirmation',function(){
         return view('pages.confirmation');

@@ -20,7 +20,7 @@ class UserRepository implements IUserRepository
 
     public function isAdmin($id)
     {
-         return User::where('id', $id)
+         return User::where('user_id', $id)
                 ->where('role', 'admin')
                 ->exists();
     }

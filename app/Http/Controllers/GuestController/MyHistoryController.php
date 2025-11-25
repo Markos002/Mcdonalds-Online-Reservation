@@ -15,7 +15,10 @@ class MyHistoryController extends Controller
     public function index()
     {
         $myHistory = $this->recordRegistryService->myReservationHistory();
-
+                //dd($myHistory);
+        return view('pages.guest.myhistory',compact(
+            'myHistory'
+        ));
     }
 
 }
