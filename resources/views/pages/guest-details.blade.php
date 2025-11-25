@@ -50,6 +50,7 @@
                     'Reservation ID' => '#'.$party->reservation_id,
                     'Date' => \Carbon\Carbon::parse($reservationDetail->partyDetail->check_in_date)->format('F j, Y') ,
                     'Time' => $party->check_in_time . ' - ' . $party->check_out_time,
+                    'Time Extend' => $party->time_extend . ' hour(s)',
                     'Adults' => $party->adults,
                     'Kids' => $party->kids,
                     'Occasion' => ucfirst($party->occasion),
